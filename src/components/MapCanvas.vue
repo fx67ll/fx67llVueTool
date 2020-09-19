@@ -11,9 +11,10 @@
 				<span v-show="this.isCheckArea === false">确定绘制区域</span>
 				<span v-show="this.isCheckArea === true">重新确定绘制区域</span>
 			</div>
-			<div v-show="this.isCheckArea === true && this.pathArr.length > 2 && this.tooltype === 'custom'" @click="drawSea">将线段绘制成闭合区域</div>
+			<div v-show="this.isCheckArea === true && this.pathArr.length > 2 && this.tooltype === 'custom'" @click="drawArea">将线段绘制成闭合区域</div>
 			<div v-show="this.tooltype === 'gaode'" @click="draw('line')">绘制线段</div>
 			<div @click="cancel">撤销</div>
+			<div v-show="this.isDrawTestArea === false" @click="drawTestArea">绘制演示图形</div>
 		</div>
 		<div id="map-container" ref="map"></div>
 	</div>
@@ -21,12 +22,14 @@
 
 <script>
 import _ from 'underscore';
+import testData from '../api/testData.js';
 
 export default {
 	name: 'Map',
 	data() {
 		return {
 			isCheckArea: false, // 用于自定义画板锁定当前地图的判断变量
+			isDrawTestArea: false, // 只允许绘制一次演示图形
 			AMap: null, // 地图对象
 			Canvas: null, // 画板对象
 			CanvasContext: null, // 画板实例对象
@@ -96,7 +99,23 @@ export default {
 				var arr = [
 					{
 						opacityPos: 0, // 如果只想用一种颜色，那可以去用高德自带的画图工具，没有必要使用自定义的canvas画图工具
-						strokeCo: '#00BFFF'
+						strokeCo: '#ffff00'
+					},
+					{
+						opacityPos: 0.2,
+						strokeCo: '#55ff00'
+					},
+					{
+						opacityPos: 0.4,
+						strokeCo: '#ff5500'
+					},
+					{
+						opacityPos: 0.6,
+						strokeCo: '#ff0000'
+					},
+					{
+						opacityPos: 0.8,
+						strokeCo: '#5500ff'
 					},
 					{
 						opacityPos: 1,
@@ -331,6 +350,18 @@ export default {
 			self.handleGadient(context, self.fillStyle);
 			context.stroke();
 		},
+		// 创建演示用的区域图形
+		drawTestArea() {
+			var self = this;
+			this.isDrawTestArea = true;
+			self.initCanvasContext(self.AMap, self.strokeWidth, self.shadowStyle);
+			_.each(testData, function(item, key) {
+				if (key !== testData.length - 1) {
+					self.drawLineByPostion(self.AMap, self.CanvasContext, self.strokeColor, testData[key].x, testData[key].y, testData[key + 1].x, testData[key + 1].y);
+				}
+			});
+			self.drawByPath(self.AMap, self.CanvasContext, testData);
+		},
 		// 处理渐变
 		// fillstyle填充样式对象
 		handleGadient(context, fillstyle) {
@@ -433,7 +464,7 @@ export default {
 				});
 			}
 		},
-		drawSea() {
+		drawArea() {
 			var self = this;
 			self.drawByPath(self.AMap, self.CanvasContext, self.pathArr);
 		},
@@ -452,6 +483,7 @@ export default {
 			});
 		},
 		cancel() {
+			this.isDrawTestArea = false;
 			this.mapInit();
 			this.pathArr = [];
 		}
@@ -486,14 +518,18 @@ export default {
 		position: absolute;
 		top: 20px;
 		left: 30px;
-		border: 1px solid red;
 		z-index: 1000;
+		border: 1px solid red;
 		box-shadow: 1px 1px 5px #f8f8f8;
 		div {
 			cursor: pointer;
 			padding: 4px;
 			border: 1px solid red;
 			.ban-user-select();
+		}
+		div:hover {
+			background-color: #42b983;
+			color: #ffffff;
 		}
 	}
 }
