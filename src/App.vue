@@ -8,7 +8,7 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import Map from './map/MapCanvas.vue';
+import Map from './components/MapCanvas.vue';
 
 export default {
 	name: 'app',
