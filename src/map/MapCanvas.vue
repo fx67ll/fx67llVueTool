@@ -30,7 +30,8 @@ export default {
 			AMap: null, // 地图对象
 			Canvas: null, // 画板对象
 			CanvasContext: null, // 画板实例对象
-			pathArr: [] // 经纬度坐标对象集合
+			pathArr: [], // 经纬度坐标对象集合,
+			CanvasSize: [] // 画板对象坐标数组
 		};
 	},
 	props: {
@@ -94,7 +95,7 @@ export default {
 			default: function() {
 				var arr = [
 					{
-						opacityPos: 0,
+						opacityPos: 0, // 如果只想用一种颜色，那可以去用高德自带的画图工具，没有必要使用自定义的canvas画图工具
 						strokeCo: '#00BFFF'
 					},
 					{
@@ -154,12 +155,91 @@ export default {
 			}
 		},
 		// 多边形的填充颜色，从这里继续写参数
-		fillcolor: {
-			type: String,
+		fillStyle: {
+			type: Object,
 			required: false,
-			default: '#E1FFFF',
-			validator(value) {
-				return new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(value);
+			default: function() {
+				var obj = {
+					isFill: true, // 默认填充，不填充的话可以直接传false，下面的属性也不会再验证
+					fillColor: [
+						{
+							opacityPos: 0,
+							fillCo: '#aaff7f'
+						},
+						{
+							opacityPos: 0.2,
+							fillCo: '#aaffff'
+						},
+						{
+							opacityPos: 0.4,
+							fillCo: '#ffff7f'
+						},
+						{
+							opacityPos: 0.6,
+							fillCo: '#ffaa7f'
+						},
+						{
+							opacityPos: 0.8,
+							fillCo: '#aaaa7f'
+						},
+						{
+							opacityPos: 1,
+							fillCo: '#ffaaff'
+						}
+					],
+					gradientDirection: 'right-bottom' //可用值: left-top left-bottom right-top right-bottom middle-border border-middle top-bottom bottom-top left-right right-left
+				};
+				return obj;
+			},
+			validator(obj) {
+				if (obj.hasOwnProperty('isFill') || typeof obj.isFill !== boolean) {
+					if (obj.isFill === true) {
+						if (obj.hasOwnProperty('fillColor')) {
+							var vaildNum = 0;
+							if (obj.fillColor.length > 0) {
+								_.each(obj.fillColor, function(item, key) {
+									if (item.hasOwnProperty('opacityPos') && item.hasOwnProperty('fillCo')) {
+										if (new RegExp('^[0-1]{1}(.{1,2})?$').test(item.opacityPos)) {
+											if (new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(item.fillCo)) {
+												vaildNum = vaildNum + 1;
+											}
+										}
+									}
+								});
+							}
+							if (vaildNum === obj.fillColor.length) {
+								if (obj.hasOwnProperty('gradientDirection')) {
+									if (
+										obj.gradientDirection === 'left-top' ||
+										obj.gradientDirection === 'left-bottom' ||
+										obj.gradientDirection === 'right-top' ||
+										obj.gradientDirection === 'right-bottom' ||
+										obj.gradientDirection === 'middle-border' ||
+										obj.gradientDirection === 'border-middle' ||
+										obj.gradientDirection === 'top-bottom' ||
+										obj.gradientDirection === 'bottom-top' ||
+										obj.gradientDirection === 'left-right' ||
+										obj.gradientDirection === 'right-left'
+									) {
+										return true;
+									} else {
+										return false;
+									}
+								} else {
+									return false;
+								}
+							} else {
+								return false;
+							}
+						} else {
+							return false;
+						}
+					} else {
+						return true;
+					}
+				} else {
+					return false;
+				}
 			}
 		}
 	},
@@ -214,6 +294,7 @@ export default {
 			canvas.classList.add('canvas-new');
 			canvas.width = map.getSize().width;
 			canvas.height = map.getSize().height;
+			this.CanvasSize = [canvas.width, canvas.height];
 			var context = canvas.getContext('2d');
 			this.CanvasContext = context;
 
@@ -247,9 +328,59 @@ export default {
 				}
 			});
 			context.closePath();
-			context.fillStyle = self.fillcolor;
-			context.fill(); // 先填充再画边框，否则会导致填充的时候遮盖边框
+			self.handleGadient(context, self.fillStyle);
 			context.stroke();
+		},
+		// 处理渐变
+		// fillstyle填充样式对象
+		handleGadient(context, fillstyle) {
+			var self = this;
+			if (fillstyle.isFill === true) {
+				var tl = { x: 0, y: 0 };
+				var tr = { x: self.CanvasSize[0], y: 0 };
+				var bl = { x: 0, y: self.CanvasSize[1] };
+				var br = { x: self.CanvasSize[0], y: self.CanvasSize[1] };
+				var gradient = null;
+				if (fillstyle.gradientDirection === 'left-top') {
+					gradient = context.createLinearGradient(br.x, br.y, tl.x, tl.y);
+				}
+				if (fillstyle.gradientDirection === 'left-bottom') {
+					gradient = context.createLinearGradient(tr.x, tr.y, bl.x, bl.y);
+				}
+				if (fillstyle.gradientDirection === 'right-top') {
+					gradient = context.createLinearGradient(bl.x, bl.y, tr.x, tr.y);
+				}
+				if (fillstyle.gradientDirection === 'right-bottom') {
+					gradient = context.createLinearGradient(tl.x, tl.y, br.x, br.y);
+				}
+				if (fillstyle.gradientDirection === 'middle-border') {
+					gradient = context.createLinearGradient(br.x, br.y, tl.x, tl.y);
+				}
+				if (fillstyle.gradientDirection === 'border-middle') {
+					gradient = context.createLinearGradient(br.x, br.y, tl.x, tl.y);
+				}
+				if (fillstyle.gradientDirection === 'top-bottom') {
+					gradient = context.createLinearGradient(tl.x, tl.y, bl.x, bl.y);
+				}
+				if (fillstyle.gradientDirection === 'bottom-top') {
+					gradient = context.createLinearGradient(bl.x, bl.y, tl.x, tl.y);
+				}
+				if (fillstyle.gradientDirection === 'left-right') {
+					gradient = context.createLinearGradient(tl.x, tl.y, tr.x, tr.y);
+				}
+				if (fillstyle.gradientDirection === 'right-left') {
+					gradient = context.createLinearGradient(tr.x, tr.y, tl.x, tl.y);
+				}
+				_.each(fillstyle.fillColor, function(item, key) {
+					// 创建渐变的开始颜色，0表示偏移量，个人理解为直线上的相对位置，最大为1，一个渐变中可以写任意个渐变颜色
+					gradient.addColorStop(item.opacityPos, item.fillCo);
+				});
+				context.fillStyle = gradient;
+				context.fill(); // 先填充再画边框，否则会导致填充的时候遮盖边框
+			} else {
+				context.fillStyle = '';
+				context.fill(); // 先填充再画边框，否则会导致填充的时候遮盖边框
+			}
 		},
 		// 根据容器内的像素坐标绘制线
 		// startpixel起点对象{x:0,y:0} endpixel终点对象{x:0,y:0}
