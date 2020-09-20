@@ -344,10 +344,12 @@ export default {
 				if (key !== 0) {
 					var pixel = map.lnglatTocontainer(new AMap.LngLat(item.x, item.y));
 					context.lineTo(pixel.x, pixel.y);
+					self.handleStrokeGadient(context, self.strokeColor, startpixel, pixel);
+					context.stroke();
 				}
 			});
 			context.closePath();
-			self.handleGadient(context, self.fillStyle);
+			self.handleFillGadient(context, self.fillStyle);
 			context.stroke();
 		},
 		// 创建演示用的区域图形
@@ -362,9 +364,18 @@ export default {
 			});
 			self.drawByPath(self.AMap, self.CanvasContext, testData);
 		},
-		// 处理渐变
+		// 处理线渐变
+		handleStrokeGadient(context, strokecolor, startpixel, endpixel) {
+			var gradient = context.createLinearGradient(startpixel.x, startpixel.y, endpixel.x, endpixel.y); //线性渐变的起止坐标
+			_.each(strokecolor, function(item, key) {
+				// 创建渐变的开始颜色，0表示偏移量，个人理解为直线上的相对位置，最大为1，一个渐变中可以写任意个渐变颜色
+				gradient.addColorStop(item.opacityPos, item.strokeCo);
+			});
+			context.strokeStyle = gradient;
+		},
+		// 处理填充渐变
 		// fillstyle填充样式对象
-		handleGadient(context, fillstyle) {
+		handleFillGadient(context, fillstyle) {
 			var self = this;
 			if (fillstyle.isFill === true) {
 				var tl = { x: 0, y: 0 };
@@ -384,12 +395,13 @@ export default {
 				if (fillstyle.gradientDirection === 'right-bottom') {
 					gradient = context.createLinearGradient(tl.x, tl.y, br.x, br.y);
 				}
-				if (fillstyle.gradientDirection === 'middle-border') {
-					gradient = context.createLinearGradient(br.x, br.y, tl.x, tl.y);
-				}
-				if (fillstyle.gradientDirection === 'border-middle') {
-					gradient = context.createLinearGradient(br.x, br.y, tl.x, tl.y);
-				}
+				// 径向渐变待开发
+				// if (fillstyle.gradientDirection === 'middle-border') {
+				// 	gradient = context.createLinearGradient(br.x, br.y, tl.x, tl.y);
+				// }
+				// if (fillstyle.gradientDirection === 'border-middle') {
+				// 	gradient = context.createLinearGradient(br.x, br.y, tl.x, tl.y);
+				// }
 				if (fillstyle.gradientDirection === 'top-bottom') {
 					gradient = context.createLinearGradient(tl.x, tl.y, bl.x, bl.y);
 				}
@@ -433,12 +445,7 @@ export default {
 			var pixel2 = map.lnglatTocontainer(new AMap.LngLat(endlng, endlat));
 			context.moveTo(pixel1.x, pixel1.y);
 			context.lineTo(pixel2.x, pixel2.y);
-			var gradient = context.createLinearGradient(pixel1.x, pixel1.y, pixel2.x, pixel2.y); //线性渐变的起止坐标
-			_.each(strokecolor, function(item, key) {
-				// 创建渐变的开始颜色，0表示偏移量，个人理解为直线上的相对位置，最大为1，一个渐变中可以写任意个渐变颜色
-				gradient.addColorStop(item.opacityPos, item.strokeCo);
-			});
-			context.strokeStyle = gradient;
+			this.handleStrokeGadient(context, strokecolor, pixel1, pixel2);
 			context.stroke();
 		},
 		// 自定义工具有天然缺陷，canvas图层未解决如何随地图自动放大缩小
