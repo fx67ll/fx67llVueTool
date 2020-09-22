@@ -2,26 +2,25 @@
 	<div id="app">
 		<!-- <img alt="Vue logo" src="./assets/logo.png"> -->
 		<!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-		<!-- <Map :mapcenter="mapcenter"></Map> -->
-		<Test></Test>
+		<!-- <Map></Map> -->
+		<Index></Index>
 	</div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 // import Map from './components/MapCanvas.vue';
-import Test from './view/index/index.vue';
+import Index from './view/index.vue';
 
 export default {
 	name: 'app',
 	components: {
 		// HelloWorld
 		// Map
-		Test
+		Index
 	},
 	data() {
 		return {
-			mapcenter: [118.789611, 32.016625]
 		};
 	}
 };
@@ -43,6 +42,5 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
-	/* margin-top: 60px; */
 }
 </style>
