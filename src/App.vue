@@ -1,20 +1,23 @@
 <template>
 	<div id="app">
-		<!-- <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-		<Map :mapcenter="mapcenter"></Map>
+		<!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+		<!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+		<!-- <Map :mapcenter="mapcenter"></Map> -->
+		<Test></Test>
 	</div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import Map from './components/MapCanvas.vue';
+// import Map from './components/MapCanvas.vue';
+import Test from './view/index/index.vue';
 
 export default {
 	name: 'app',
 	components: {
 		// HelloWorld
-		Map
+		// Map
+		Test
 	},
 	data() {
 		return {
