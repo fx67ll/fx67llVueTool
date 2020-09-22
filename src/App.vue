@@ -1,26 +1,31 @@
 <template>
 	<div id="app">
-		<!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-		<!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
+		<fx67llIndex></fx67llIndex>
 		<!-- <Map></Map> -->
-		<Index></Index>
 	</div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import vueCanvasNest from 'vue-canvas-nest';
+import fx67llIndex from './views/index.vue';
 // import Map from './components/MapCanvas.vue';
-import Index from './view/index.vue';
 
 export default {
 	name: 'app',
 	components: {
-		// HelloWorld
+		vueCanvasNest,
+		fx67llIndex
 		// Map
-		Index
 	},
 	data() {
 		return {
+			nestConfig: {
+				color: 'rgb(186, 186, 186)', // the canvas line color, default: '255,0,0'; the color is (R,G,B)
+				opacity: 0.7, // the opacity of line (0~1), default: 0.7
+				count: 99, // the number of lines, default: 99
+				zIndex: -1 // the index of z space, default: -1
+			}
 		};
 	}
 };
@@ -37,10 +42,5 @@ body {
 #app {
 	width: 100%;
 	height: 100%;
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
 }
 </style>
