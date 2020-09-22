@@ -28,6 +28,7 @@ export default {
 		color: rgb(186, 186, 186, 1);
 		font-size: 40px;
 		text-align: center;
+		font-family: 'PFR';
 	}
 	.fx67ll-link{
 		width: 100%;
