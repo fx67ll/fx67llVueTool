@@ -516,6 +516,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	position: relative;
+	color: #42B983;
 	#map-container {
 		width: 100%;
 		height: 100%;
@@ -526,12 +527,12 @@ export default {
 		top: 20px;
 		left: 30px;
 		z-index: 1000;
-		border: 1px solid red;
+		border: 1px solid #42B983;
 		box-shadow: 1px 1px 5px #f8f8f8;
 		div {
 			cursor: pointer;
 			padding: 4px;
-			border: 1px solid red;
+			border: 1px solid #42B983;
 			.ban-user-select();
 		}
 		div:hover {
