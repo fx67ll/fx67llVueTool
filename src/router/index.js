@@ -5,7 +5,7 @@ Vue.use(Router)
 
 import Index from '@v/index.vue'
 import MapCanvas from '@c/MapCanvas.vue'
-import Test from '@v/index/index.vue'
+// import Test from '@v/index/index.vue'
 
 export const fx67llRoutes = [{
 		path: '/',
@@ -17,11 +17,11 @@ export const fx67llRoutes = [{
 		name: 'mapcanvas',
 		component: MapCanvas
 	},
-	{
-		path: '/test',
-		name: 'test',
-		component: Test
-	}
+	// {
+	// 	path: '/test',
+	// 	name: 'test',
+	// 	component: Test
+	// }
 ]
 
 export default new Router({

@@ -33,12 +33,11 @@ export default {
 			time: 0
 		};
 	},
-	methods: {
-	}
+	methods: {}
 };
 </script>
 
-<style>
+<style lang="less">
 html,
 body {
 	width: 100%;
@@ -57,5 +56,8 @@ body {
 	padding: 10px;
 	background-color: #42b983;
 	border-radius: 12px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
 }
 </style>
