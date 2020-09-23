@@ -6,6 +6,9 @@ Vue.config.productionTip = false
 import less from 'less'
 Vue.use(less)
 
+import router from './router/index.js'
+
 new Vue({
-  render: h => h(App),
+	router,
+	render: h => h(App),
 }).$mount('#app')
