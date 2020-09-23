@@ -1,12 +1,15 @@
 <template>
 	<div class="fx67ll-box">
 		<div class="fx67ll-title"><span @click="linktoFx67ll">fx67ll</span></div>
-		<div class="fx67ll-link"><span>基于高德地图的简易canvas渐变色区域绘制工具</span></div>
+		<div class="fx67ll-link">
+			<router-link tag="span" to="/mapcanvas">基于高德地图的简易canvas渐变色区域绘制工具</router-link>
+			<router-link tag="span" to="/test">测试页面</router-link>
+		</div>
 		<div class="fx67ll-footer">
 			Designed & Powered by
-			<a href="https://fx67ll.com"  target="_blank">fx67ll</a>&#12288;
-			Copyright© 2018-{{ this.year }}&#12288;
-			<a href="https://beian.miit.gov.cn/#/Integrated/index"  target="_blank">皖ICP备18017174号-2</a>
+			<a href="https://fx67ll.com" target="_blank">fx67ll</a>
+			&#12288; Copyright© 2018-{{ this.year }}&#12288;
+			<a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">皖ICP备18017174号-2</a>
 		</div>
 	</div>
 </template>
@@ -22,7 +25,8 @@ export default {
 	},
 	methods: {
 		linktoFx67ll() {
-			window.open('https://fx67ll.com');
+			// window.open('https://fx67ll.com');
+			console.log('####### #     #  #####  ####### #       #     \n#        #   #  #     # #    #  #       #       \n#         # #   #           #   #       #       \n#####      #    ######     #    #       #       \n#         # #   #     #   #     #       #\n#        #   #  #     #   #     #       #\n#       #     #  #####    #     ####### ####### ');
 		}
 	}
 };
@@ -41,14 +45,16 @@ export default {
 			display: inline-block;
 			font-size: 36px;
 		}
-		span:hover {
-			color: #42b983;
-		}
+		// span:hover {
+		// 	color: #42b983;
+		// }
 	}
 	.fx67ll-link {
 		padding: 50px 100px;
 		span {
 			display: inline-block;
+			width: 100%;
+			margin-bottom: 20px;
 			font-size: 24px;
 		}
 		span:hover {

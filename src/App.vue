@@ -1,7 +1,8 @@
 <template>
 	<div id="app">
+		<router-view></router-view>
 		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
-		<fx67llIndex></fx67llIndex>
+		<!-- <fx67llIndex></fx67llIndex> -->
 		<!-- <Map></Map> -->
 	</div>
 </template>
@@ -25,8 +26,27 @@ export default {
 				opacity: 0.7, // the opacity of line (0~1), default: 0.7
 				count: 99, // the number of lines, default: 99
 				zIndex: -1 // the index of z space, default: -1
-			}
+			},
+			time: 0
 		};
+	},
+	created() {
+		this.checkDomInit();
+	},
+	methods: {
+		checkDomInit() {
+			var self = this;
+			console.log(1, new Date().getTime());
+			this.time = new Date().getTime();
+			document.onreadystatechange = completeLoading;
+			function completeLoading() {
+				if (document.readyState == 'complete') {
+					console.log(2, new Date().getTime());
+					self.time = new Date().getTime() - self.time;
+					console.log('总共耗时：' + self.time);
+				}
+			}
+		}
 	}
 };
 </script>
