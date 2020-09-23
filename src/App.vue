@@ -38,6 +38,8 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	font-family: 'PFR';
+	color: rgb(186, 186, 186, 1);
 }
 #app {
 	width: 100%;

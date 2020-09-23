@@ -24,16 +24,14 @@ export default {
 	.no-select();
 	.fx67ll-title {
 		width: 100%;
-		padding: 20px 0;
-		color: rgb(186, 186, 186, 1);
+		padding: 40px 0;
 		font-size: 40px;
 		text-align: center;
-		font-family: 'PFR';
 	}
 	.fx67ll-link{
-		width: 100%;
 		padding: 50px 100px;
 		span{
+			font-size: 24px;
 			display: inline-block;
 		}
 		span:hover{
