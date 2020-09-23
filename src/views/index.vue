@@ -60,6 +60,7 @@ export default {
 			width: 100%;
 			margin-bottom: 20px;
 			font-size: 24px;
+			text-align: center;
 		}
 		span:hover {
 			color: #42b983;
