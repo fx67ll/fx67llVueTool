@@ -1,26 +1,30 @@
 <template>
 	<div id="app">
-		<router-view></router-view>
+		<router-view v-show="isDomOK"></router-view>
 		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
-		<!-- <fx67llIndex></fx67llIndex> -->
-		<!-- <Map></Map> -->
+		<!-- <div class="loader" v-show="!isDomOK">
+			<div class="loader-inner pacman">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div> -->
 	</div>
 </template>
 
 <script>
 import vueCanvasNest from 'vue-canvas-nest';
-import fx67llIndex from './views/index.vue';
-// import Map from './components/MapCanvas.vue';
 
 export default {
 	name: 'app',
 	components: {
-		vueCanvasNest,
-		fx67llIndex
-		// Map
+		vueCanvasNest
 	},
 	data() {
 		return {
+			isDomOK: false,
 			nestConfig: {
 				color: 'rgb(186, 186, 186)', // the canvas line color, default: '255,0,0'; the color is (R,G,B)
 				opacity: 0.7, // the opacity of line (0~1), default: 0.7
@@ -36,14 +40,14 @@ export default {
 	methods: {
 		checkDomInit() {
 			var self = this;
-			console.log(1, new Date().getTime());
+			this.isDomOK = false;
 			this.time = new Date().getTime();
 			document.onreadystatechange = completeLoading;
 			function completeLoading() {
 				if (document.readyState == 'complete') {
-					console.log(2, new Date().getTime());
 					self.time = new Date().getTime() - self.time;
-					console.log('总共耗时：' + self.time);
+					console.log('网页加载共耗时：' + self.time);
+					self.isDomOK = true;
 				}
 			}
 		}
@@ -64,5 +68,16 @@ body {
 #app {
 	width: 100%;
 	height: 100%;
+}
+.loader {
+	width: 100px;
+	padding: 10px;
+	background-color: #42b983;
+	border-radius: 12px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -20px;
+	margin-left: -50px;
 }
 </style>

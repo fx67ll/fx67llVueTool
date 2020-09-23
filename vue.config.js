@@ -9,7 +9,8 @@ function addStyleResource(rule) {
 		.use("style-resource")
 		.loader("style-resources-loader")
 		.options({
-			patterns: [path.resolve(__dirname, "./src/assets/styles/mixin.less")],
+			patterns: [path.resolve(__dirname, "./src/assets/styles/mixin.less"), path.resolve(__dirname,
+				"./src/assets/styles/loader.less")],
 		})
 }
 

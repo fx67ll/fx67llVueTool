@@ -1,6 +1,8 @@
 <template>
 	<div class="fx67ll-box">
-		<div class="fx67ll-title"><span @click="linktoFx67ll">fx67ll</span></div>
+		<div class="fx67ll-title">
+			<span @click="linktoFx67ll">fx67ll</span>
+		</div>
 		<div class="fx67ll-link">
 			<router-link tag="span" to="/mapcanvas">基于高德地图的简易canvas渐变色区域绘制工具</router-link>
 			<!-- <router-link tag="span" to="/test">测试页面</router-link> -->
@@ -26,7 +28,9 @@ export default {
 	methods: {
 		linktoFx67ll() {
 			// window.open('https://fx67ll.com');
-			console.log('####### #     #  #####  ####### #       #     \n#        #   #  #     # #    #  #       #       \n#         # #   #           #   #       #       \n#####      #    ######     #    #       #       \n#         # #   #     #   #     #       #\n#        #   #  #     #   #     #       #\n#       #     #  #####    #     ####### ####### ');
+			console.log(
+				'####### #     #  #####  ####### #       #     \n#        #   #  #     # #    #  #       #       \n#         # #   #           #   #       #       \n#####      #    ######     #    #       #       \n#         # #   #     #   #     #       #\n#        #   #  #     #   #     #       #\n#       #     #  #####    #     ####### ####### '
+			);
 		}
 	}
 };
