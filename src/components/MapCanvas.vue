@@ -58,7 +58,7 @@ export default {
 		// 地图中心点，保留6位小数的经纬度数组
 		mapcenter: {
 			type: Array,
-			required: true,
+			required: false,
 			default: function() {
 				var arr = [118.779611, 32.016625];
 				return arr;
