@@ -14,7 +14,7 @@
 			<div v-show="this.isCheckArea === true && this.pathArr.length > 2 && this.tooltype === 'custom'" @click="drawArea">将线段绘制成闭合区域</div>
 			<div v-show="this.tooltype === 'gaode'" @click="draw('line')">绘制线段</div>
 			<div @click="cancel">撤销</div>
-			<div v-show="this.isDrawTestArea === false" @click="drawTestArea">绘制演示图形</div>
+			<div v-show="this.isDrawTestArea === false" @click="drawTest">绘制演示图形</div>
 		</div>
 		<div id="map-container" ref="map"></div>
 	</div>
@@ -22,7 +22,6 @@
 
 <script>
 import _ from 'underscore';
-import testData from '../api/testData.js';
 
 export default {
 	name: 'Map',
@@ -34,7 +33,50 @@ export default {
 			Canvas: null, // 画板对象
 			CanvasContext: null, // 画板实例对象
 			pathArr: [], // 经纬度坐标对象集合,
-			CanvasSize: [] // 画板对象坐标数组
+			CanvasSize: [], // 画板对象坐标数组
+			testData: [
+				{
+					// 测试用数据，非必要参数
+					x: 118.739314,
+					y: 32.041765
+				},
+				{
+					x: 118.806605,
+					y: 32.036963
+				},
+				{
+					x: 118.827977,
+					y: 32.018335
+				},
+				{
+					x: 118.838878,
+					y: 32.002251
+				},
+				{
+					x: 118.804546,
+					y: 31.989876
+				},
+				{
+					x: 118.776736,
+					y: 31.988784
+				},
+				{
+					x: 118.75236,
+					y: 31.994389
+				},
+				{
+					x: 118.739829,
+					y: 32.005817
+				},
+				{
+					x: 118.743863,
+					y: 32.032307
+				},
+				{
+					x: 118.717599,
+					y: 32.032962
+				}
+			]
 		};
 	},
 	props: {
@@ -352,8 +394,12 @@ export default {
 			self.handleFillGadient(context, self.fillStyle);
 			context.stroke();
 		},
+		drawTest() {
+			var testData = this.testData;
+			this.drawTestArea(testData);
+		},
 		// 创建演示用的区域图形
-		drawTestArea() {
+		drawTestArea(testData) {
 			var self = this;
 			this.isDrawTestArea = true;
 			self.initCanvasContext(self.AMap, self.strokeWidth, self.shadowStyle);
@@ -516,7 +562,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	color: #42B983;
+	color: #42b983;
 	#map-container {
 		width: 100%;
 		height: 100%;
@@ -527,12 +573,12 @@ export default {
 		top: 20px;
 		left: 30px;
 		z-index: 1000;
-		border: 1px solid #42B983;
+		border: 1px solid #42b983;
 		box-shadow: 1px 1px 5px #f8f8f8;
 		div {
 			cursor: pointer;
 			padding: 4px;
-			border: 1px solid #42B983;
+			border: 1px solid #42b983;
 			.ban-user-select();
 		}
 		div:hover {
