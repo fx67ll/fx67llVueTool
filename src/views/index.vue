@@ -4,8 +4,8 @@
 			<span @click="linktoFx67ll">fx67ll</span>
 		</div>
 		<div class="fx67ll-link">
-			<router-link tag="span" to="/mapcanvas">CanvasMap Tool Based on GaoDeMap</router-link>
-			<!-- <router-link tag="span" to="/test">测试页面</router-link> -->
+			<div class="fx67ll-link-item"><router-link tag="span" to="/mapcanvas">CanvasMap Tool Based on GaoDeMap</router-link></div>
+			<!-- <div class="fx67ll-link-item"><router-link tag="span" to="/test">Test</router-link></div> -->
 		</div>
 		<div class="fx67ll-footer">
 			Designed & Powered by
@@ -55,15 +55,17 @@ export default {
 	}
 	.fx67ll-link {
 		padding: 50px 100px;
-		span {
-			display: inline-block;
+		.fx67ll-link-item{
 			width: 100%;
-			margin-bottom: 20px;
-			font-size: 24px;
+			margin-bottom: 25px;
 			text-align: center;
-		}
-		span:hover {
-			color: #42b983;
+			span {
+				display: inline-block;
+				font-size: 24px;
+			}
+			span:hover {
+				color: #42b983;
+			}
 		}
 	}
 	.fx67ll-footer {
