@@ -60,17 +60,16 @@ body {
 	position: absolute;
 	top: 20px;
 	right: 30px;
+	border: 1px solid #42b983;
+	box-shadow: 1px 1px 5px #f8f8f8;
 	z-index: 999;
 }
 .fx67ll-bckbtn span {
 	display: inline-block;
-	padding: 10px 15px;
+	padding: 4px;
 	.ban-user-select();
 	color: #42b983;
-	font-size: 24px;
-	border: 2px solid #42b983;
-	box-shadow: 1px 1px 5px #f8f8f8;
-	border-radius: 8px;
+	border: 1px solid #42b983;
 }
 .fx67ll-bckbtn span:hover {
 	background-color: #42b983;
