@@ -51,13 +51,13 @@ body {
 	width: 100%;
 	height: 100%;
 }
-.loader {
-	width: 100px;
-	padding: 10px;
-	background-color: #42b983;
-	border-radius: 12px;
-	position: absolute;
-	top: 20px;
-	right: 20px;
-}
+// .loader {
+// 	width: 100px;
+// 	padding: 10px;
+// 	background-color: #42b983;
+// 	border-radius: 12px;
+// 	position: absolute;
+// 	top: 20px;
+// 	right: 20px;
+// }
 </style>
