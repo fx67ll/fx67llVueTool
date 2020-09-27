@@ -2,7 +2,7 @@
 	<div id="app">
 		<router-view></router-view>
 		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
-		<div v-show="this.$store.state.isShowbckbtn" class="fx67ll-bckbtn"><span @click="back">返 回</span></div>
+		<div v-show="this.$store.state.isShowbckbtn" class="fx67ll-bckbtn"><span @click="back">返回</span></div>
 		<!-- <div class="loader">
 			<div class="loader-inner pacman">
 				<div></div>
@@ -66,9 +66,11 @@ body {
 }
 .fx67ll-bckbtn span {
 	display: inline-block;
-	padding: 4px;
+	padding: 6px 6px 2px 6px;
 	.ban-user-select();
 	color: #42b983;
+	font-size: 18px;
+	line-height: 22px;
 	border: 1px solid #42b983;
 }
 .fx67ll-bckbtn span:hover {
