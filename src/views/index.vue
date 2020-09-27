@@ -40,7 +40,7 @@ export default {
 .fx67ll-box {
 	width: 100%;
 	height: 100%;
-	.no-select();
+	.ban-user-select();
 	.fx67ll-title {
 		width: 100%;
 		padding: 36px 0;

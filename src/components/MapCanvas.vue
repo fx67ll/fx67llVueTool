@@ -15,6 +15,7 @@
 			<div v-show="this.tooltype === 'gaode'" @click="draw('line')">绘制线段</div>
 			<div @click="cancel">撤销</div>
 			<div v-show="this.isDrawTestArea === false" @click="drawTest">绘制演示图形</div>
+			<div @click="showCode">查看代码</div>
 		</div>
 		<div id="map-container" ref="map"></div>
 	</div>
@@ -539,6 +540,14 @@ export default {
 			this.isDrawTestArea = false;
 			this.mapInit();
 			this.pathArr = [];
+		},
+		showCode() {
+			this.$router.push({
+				path: '/code',
+				query: {
+					code: 'MapCanvasCode'
+				}
+			});
 		}
 	}
 };

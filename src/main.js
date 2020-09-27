@@ -8,6 +8,10 @@ Vue.use(less)
 
 import router from './router/index.js'
 
+import VueCodeMirror from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+Vue.use(VueCodeMirror)
+
 new Vue({
 	router,
 	render: h => h(App),

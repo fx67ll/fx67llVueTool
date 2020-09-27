@@ -1,7 +1,7 @@
 // 引入苹果字体
 @font-face {
 	font-family: 'PFR';
-	src: url('~@s/fonts/PingFang Regular En.ttf') format('truetype');
+	src: url('~@a/fonts/PingFang Regular En.ttf') format('truetype');
 }
 
 a {
@@ -11,8 +11,9 @@ a:hover {
 	color: #42b983;
 }
 
-// 禁止文本选中
-.no-select {
+// 禁止文本选中且修改鼠标默认效果
+.ban-user-select {
+	cursor: pointer;
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Chrome/Safari/Opera */
 	-khtml-user-select: none; /* Konqueror */

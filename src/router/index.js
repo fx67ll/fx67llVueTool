@@ -4,8 +4,9 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import Index from '@v/index.vue'
+import CodeMirror from '@c/CodeMirror.vue'
 import MapCanvas from '@c/MapCanvas.vue'
-// import Test from '@v/index/index.vue'
+import Test from '@c/Test.vue'
 
 export const fx67llRoutes = [{
 		path: '/',
@@ -13,15 +14,20 @@ export const fx67llRoutes = [{
 		component: Index
 	},
 	{
+		path: '/code',
+		name: 'code',
+		component: CodeMirror
+	},
+	{
 		path: '/mapcanvas',
 		name: 'mapcanvas',
 		component: MapCanvas
 	},
-	// {
-	// 	path: '/test',
-	// 	name: 'test',
-	// 	component: Test
-	// }
+	{
+		path: '/test',
+		name: 'test',
+		component: Test
+	}
 ]
 
 export default new Router({
