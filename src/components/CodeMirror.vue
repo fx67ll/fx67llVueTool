@@ -1,7 +1,6 @@
 <template>
 	<div class="code-box">
 		<codemirror ref="mycode" :value="curCode" :options="cmOptions" class="code-codemirror"></codemirror>
-		<div class="code-btn"><span @click="back">返回示例</span></div>
 		<!-- <div class="code-btn"><span @click="getCode">获取转义代码</span></div> -->
 	</div>
 </template>
@@ -78,7 +77,7 @@ export default {
 	}
 	.code-btn {
 		position: absolute;
-		top: 20px;
+		bottom: 20px;
 		right: 30px;
 		border: 1px solid #42b983;
 		box-shadow: 1px 1px 5px #f8f8f8;

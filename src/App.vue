@@ -2,6 +2,7 @@
 	<div id="app">
 		<router-view></router-view>
 		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
+		<div v-show="this.$store.state.isShowbckbtn" class="fx67ll-bckbtn"><span @click="back">返 回</span></div>
 		<!-- <div class="loader">
 			<div class="loader-inner pacman">
 				<div></div>
@@ -33,7 +34,11 @@ export default {
 			time: 0
 		};
 	},
-	methods: {}
+	methods: {
+		back() {
+			this.$router.go(-1);
+		}
+	}
 };
 </script>
 
@@ -50,6 +55,26 @@ body {
 #app {
 	width: 100%;
 	height: 100%;
+}
+.fx67ll-bckbtn {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	z-index: 999;
+}
+.fx67ll-bckbtn span {
+	display: inline-block;
+	padding: 10px 15px;
+	.ban-user-select();
+	color: #42b983;
+	font-size: 24px;
+	border: 2px solid #42b983;
+	box-shadow: 1px 1px 5px #f8f8f8;
+	border-radius: 8px;
+}
+.fx67ll-bckbtn span:hover {
+	background-color: #42b983;
+	color: #ffffff;
 }
 // .loader {
 // 	width: 100px;
