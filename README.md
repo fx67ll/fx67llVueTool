@@ -1,10 +1,11 @@
 # fx67llVueTool
 vue components
 
-======================================
-[示例地址](http://ez13.top)
+欢迎参观[示例地址](http://ez13.top)
 
-## 1.0.0.20200927
+======================================
+
+## 1.0.1.20200927
 * 打上了fx67ll的标志，添加了一个列表，为之后的迭代做好准备
 * 添加了codemirror作为在线编辑器，感谢Marijn Haverbeke的开源，[作者github](https://github.com/marijnh)
 
