@@ -74,6 +74,7 @@ export default {
 		text-align: center;
 		position: absolute;
 		bottom: 0;
+		user-select: text;
 	}
 }
 </style>
