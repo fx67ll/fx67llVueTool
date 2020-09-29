@@ -45,5 +45,21 @@ module.exports = {
 		types.forEach((type) =>
 			addStyleResource(config.module.rule("less").oneOf(type))
 		);
-	}
+	},
+	// webpack-dev-server 相关配置
+	devServer: {
+		// host: '0.0.0.0',
+		// port: port,
+		open: true,
+		// proxy: {
+		// 	[process.env.VUE_APP_BASE_API]: {
+		// 		target: ``,
+		// 		changeOrigin: true,
+		// 		pathRewrite: {
+		// 			['^' + process.env.VUE_APP_BASE_API]: ''
+		// 		}
+		// 	}
+		// },
+		// disableHostCheck: true
+	},
 }
