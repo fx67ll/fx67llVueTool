@@ -5,7 +5,8 @@
 		</div>
 		<div class="fx67ll-link">
 			<div class="fx67ll-link-item"><router-link tag="span" to="/mapcanvas">CanvasMap Tool Based on GaoDeMap</router-link></div>
-			<!-- <div class="fx67ll-link-item"><router-link tag="span" to="/test">Test</router-link></div> -->
+			<div class="fx67ll-link-item"><router-link tag="span" to="/splitarea">Splite Area Based on GaoDeMap</router-link></div>
+			<div class="fx67ll-link-item"><router-link tag="span" to="/test">Test</router-link></div>
 		</div>
 		<div class="fx67ll-footer">
 			Designed & Powered by
