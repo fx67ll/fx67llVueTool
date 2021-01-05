@@ -5,35 +5,35 @@ Vue.use(Router)
 
 import store from '@/store/index.js'
 
-import Index from '@v/index.vue'
-import CodeMirror from '@c/CodeMirror.vue'
-import MapCanvas from '@c/MapCanvas.vue'
-import Test from '@c/Test.vue'
-
 export const fx67llRoutes = [{
 		path: '/',
 		name: 'index',
-		component: Index
+		component: () => import('@v/index.vue') //首页
 	},
 	{
 		path: '/code',
 		name: 'code',
-		component: CodeMirror
+		component: () => import('@c/CodeMirror.vue') // 用于展示不同代码文件
 	},
 	{
 		path: '/mapcanvas',
 		name: 'mapcanvas',
-		component: MapCanvas
+		component: () => import('@v/MapCanvas.vue') // 在高德地图上绘制canvas覆盖物
+	},
+	{
+		path: '/splitarea',
+		name: 'splitarea',
+		component: () => import('@v/SplitArea.vue') // 在高德地图上绘制canvas覆盖物
 	},
 	{
 		path: '/test',
 		name: 'test',
-		component: Test
+		component: () => import('@v/Test.vue') // 测试页面
 	}
 ]
 
 const router = new Router({
-	mode: 'history', // history模式，去掉url中的#
+	mode: 'hash', // history模式，去掉url中的#
 	scrollBehavior: () => ({
 		y: 0
 	}),
@@ -42,10 +42,11 @@ const router = new Router({
 
 // 全局路由守卫
 router.beforeEach((to, from, next) => {
-	if (to.path !== '/') {
-		store.commit("setisShowbckbtn", true);
+	// 不是首页的话将自动显示返回按钮
+	if (to.name !== 'index') {
+		store.dispatch("setBtnStateAsync", true);
 	} else {
-		store.commit("setisShowbckbtn", false);
+		store.dispatch("setBtnStateAsync", false);
 	}
 	next() // 必须使用 next ,执行效果依赖 next 方法的调用参数
 })
