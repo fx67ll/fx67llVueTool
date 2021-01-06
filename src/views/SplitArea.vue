@@ -1,7 +1,7 @@
 <!-- @name: MapCanvas -->
 <!-- @author: fx67ll -->
 <!-- @version: 1.0.0-->
-<!-- @description：基于高德地图的行政区划工具 -->
+<!-- @description：基于高德地图的行政区划工具，需要在引入高德地图api的同时引入AMap.DistrictSearch插件，格式：https://webapi.amap.com/maps?key=你的秘钥&v=1.4.15&plugin=AMap.DistrictSearch-->
 <!-- @bug: 目前暂无发现bug，欢迎提供 -->
 
 <template>
@@ -49,11 +49,20 @@ export default {
 				}
 			}
 		},
-		// 地图的初始化缩放比例
+		// 地图的初始化缩放比例，2D模式下只能是int，在3D模式下的高德地图传入float才会生效
 		mapzoom: {
 			type: Number,
 			required: false,
 			default: 13.5,
+			validator(num) {
+				return num > 2 && num < 19;
+			}
+		},
+		// 查询级别，1国家，2省份，3市，4区县，默认显示整个中国的地图
+		searchLevel: {
+			type: Number,
+			required: false,
+			default: 1,
 			validator(num) {
 				return num > 2 && num < 19;
 			}
@@ -74,7 +83,7 @@ export default {
 			if (self.mapstyle !== '' && self.mapstyle !== null && self.mapstyle !== undefined) {
 				self.AMap.setMapStyle(self.mapstyle);
 			}
-			
+
 			self.drawArea();
 		},
 		// 绘制不同行政区域
@@ -83,51 +92,56 @@ export default {
 
 			var district = null;
 			var polygons = [];
-			function drawBounds() {
-				//加载行政区划插件
-				if (!district) {
-					//实例化DistrictSearch
-					var opts = {
-						subdistrict: 0, //获取边界不需要返回下级行政区
-						extensions: 'all', //返回行政区边界坐标组等具体信息
-						level: 'district' //查询行政级别为 市
-					};
-					district = new AMap.DistrictSearch(opts);
-				}
-				//行政区查询
-				district.setLevel('city');
-				district.search('嘉兴市', function(status, result) {
-					self.AMap.remove(polygons); //清除上次结果
-					polygons = [];
-					var bounds = result.districtList[0].boundaries;
-					if (bounds) {
-						for (var i = 0, l = bounds.length; i < l; i++) {
-							//生成行政区划polygon
-							var polygon = new AMap.Polygon({
-								strokeWeight: 1,
-								path: bounds[i],
-								fillOpacity: 0.4,
-								fillColor: '#80d8ff',
-								strokeColor: '#0091ea'
+			// 需要加载行政区划插件
+			// https://webapi.amap.com/maps?key=a3905d3985de06d3cf69aa47435a96f8&v=1.4.15&plugin=Map3D,AMap.DistrictSearch
+			// 在
+			// 实例化DistrictSearch
+			var opts = {
+				showbiz: false,
+				// 是否显示商圈，没有什么大影响，默认是true，本组件保留功能，但是默认不显示
+				level: 'country',
+				// 查询行政级别为 country province city district 区县为最后一级，返回street街道但是arcode不再更新，最后画的级别只能到district
+				// 若有特殊需求要查询商圈之类，可详细查询高德官方文档，本组件保留功能，但是默认不查询
+				extensions: 'all',
+				// 是否返回行政区边界坐标点，默认base不返回行政区边界坐标点，all返回行政区边界坐标组等具体信息
+				subdistrict: 0
+				// 显示下级行政区级数，0：不返回下级行政区；默认1：返回下一级行政区；2：返回下两级行政区；3：返回下三级行政区；
+			};
+			district = new AMap.DistrictSearch(opts);
+			//行政区查询
+			district.setLevel('district');
+			district.setSubdistrict(1);
+			district.search('340503', function(status, result) {
+				console.log(result.districtList);
+				self.AMap.remove(polygons); //清除上次结果
+				polygons = [];
+				var bounds = result.districtList[0].boundaries;
+				if (bounds) {
+					for (var i = 0, l = bounds.length; i < l; i++) {
+						//生成行政区划polygon
+						var polygon = new AMap.Polygon({
+							strokeWeight: 1,
+							path: bounds[i],
+							fillOpacity: 0.4,
+							fillColor: '#80d8ff',
+							strokeColor: '#0091ea'
+						});
+						polygon.on('mouseover', function() {
+							polygon.setOptions({
+								fillOpacity: 0.8
 							});
-							polygon.on('mouseover', function() {
-								polygon.setOptions({
-									fillOpacity: 0.8
-								})
+						});
+						polygon.on('mouseout', function() {
+							polygon.setOptions({
+								fillOpacity: 0.4
 							});
-							polygon.on('mouseout', function() {
-								polygon.setOptions({
-									fillOpacity: 0.4
-								})
-							});
-							polygons.push(polygon);
-						}
+						});
+						polygons.push(polygon);
 					}
-					self.AMap.add(polygons);
-					self.AMap.setFitView(polygons); //视口自适应
-				});
-			}
-			drawBounds();
+				}
+				self.AMap.add(polygons);
+				self.AMap.setFitView(polygons); //视口自适应
+			});
 		},
 		// 显示当前组件源码
 		showCode() {
@@ -180,11 +194,11 @@ export default {
 			background-color: #42b983;
 			color: #ffffff;
 		}
-		.inDev{
-			color: #ef8e81; 
+		.inDev {
+			color: #ef8e81;
 			border: 1px solid #ef8e81;
 		}
-		.inDev:hover{
+		.inDev:hover {
 			background-color: #ef8e81;
 			color: #ffffff;
 		}
