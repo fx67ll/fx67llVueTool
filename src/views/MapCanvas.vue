@@ -1,8 +1,10 @@
 <!-- @name: MapCanvas -->
 <!-- @author: fx67ll -->
-<!-- @version: 1.0.0-->
-<!-- @description：基于高德地图的自定义绘制封装组件，请在项目中安装underscore -->
+<!-- @version: 1.0.1-->
+<!-- @description：基于高德地图的自定义绘制封装组件，请在项目中安装underscore，需要在引入高德地图api，格式：https://webapi.amap.com/maps?key=你的秘钥&v=1.4.15 -->
 <!-- @bug: 目前已知bug是缩小到世界地图返回用自定义工具绘制，然后放大会导致之前的绘制全部消失 -->
+<!-- @update: 2020年9月25日，完成1.0.0开发 -->
+<!-- @update: 2021年1月6日，修改部分注释，并补充mapcenter只能传int的正则验证，因为该工具使用场景限定在2D模式下使用，高德官方规定2D的缩放只有int是有效的-->
 
 <template>
 	<div class="map">
@@ -35,9 +37,9 @@ export default {
 			CanvasContext: null, // 画板实例对象
 			pathArr: [], // 经纬度坐标对象集合,
 			CanvasSize: [], // 画板对象坐标数组
+			// 测试用数据，非必要参数
 			testData: [
 				{
-					// 测试用数据，非必要参数
 					x: 118.739314,
 					y: 32.041765
 				},
@@ -120,9 +122,14 @@ export default {
 		mapzoom: {
 			type: Number,
 			required: false,
-			default: 13.5,
+			default: 13,
 			validator(num) {
-				return num > 2 && num < 19;
+				var intreg = new RegExp('^[0-9]*[1-9][0-9]*$');
+				if(intreg.test(num)){
+					return num > 2 && num < 19;
+				} else {
+					return false;
+				}
 			}
 		},
 		// 线条的宽度
