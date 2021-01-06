@@ -16,6 +16,11 @@ export const fx67llRoutes = [{
 		component: () => import('@c/CodeMirror.vue') // 用于展示不同代码文件
 	},
 	{
+		path: '/devtest',
+		name: 'devtest',
+		component: () => import('@c/ComponentTest.vue') // 本地编写组件时候使用的测试页面
+	},
+	{
 		path: '/mapcanvas',
 		name: 'mapcanvas',
 		component: () => import('@v/MapCanvas.vue') // 在高德地图上绘制canvas覆盖物
@@ -28,7 +33,7 @@ export const fx67llRoutes = [{
 	{
 		path: '/test',
 		name: 'test',
-		component: () => import('@v/Test.vue') // 测试页面
+		component: () => import('@v/CodeTest.vue') // 代码测试页面
 	}
 ]
 
