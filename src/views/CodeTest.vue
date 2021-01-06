@@ -1,7 +1,7 @@
 <template>
 	<div class="code-box">
 		<codemirror ref="mycode" :value="curCode" :options="cmOptions" class="code-codemirror"></codemirror>
-		<div class="code-btn" v-show="isShowBtn"><span @click="getCode">获取转义代码</span></div>
+		<div class="code-btn" v-show="isDev"><span @click="getCode">获取转义代码</span></div>
 	</div>
 </template>
 
@@ -37,19 +37,16 @@ export default {
 			isShowBtn: false
 		};
 	},
+	computed: {
+		// 判断是否是开发环境，以决定是否显示获取转义字符的按钮，不然每次都需要注释掉再发布简直反人类
+		isDev() {
+			return process.env.VUE_APP_ENV === 'development'
+		}
+	},
 	mounted() {
 		this.isDev();
 	},
 	methods: {
-		// 判断是否是开发环境，以决定是否显示获取转义字符的按钮，不然每次都需要注释掉再发布简直反人类
-		isDev() {
-			var self = this;
-			if (process.env.VUE_APP_ENV === 'development') {
-				self.isShowBtn = true;
-			} else {
-				self.isShowBtn = false;
-			}
-		},
 		// 目前的转义字符获取非常低效，实际上是手动在页面上通过打印的方式再存储为字符串文件，后期通过前端工具或者上传后端处理的方式通用的批量返回
 		getCode() {
 			var self = this;
