@@ -53,9 +53,14 @@ export default {
 		mapzoom: {
 			type: Number,
 			required: false,
-			default: 13.5,
+			default: 13,
 			validator(num) {
-				return num > 2 && num < 19;
+				var intreg = new RegExp('^[0-9]*[1-9][0-9]*$');
+				if(intreg.test(num)){
+					return num > 2 && num < 19;
+				} else {
+					return false;
+				}
 			}
 		},
 		// 查询级别，1国家，2省份，3市，4区县，默认显示整个中国的地图
@@ -64,7 +69,12 @@ export default {
 			required: false,
 			default: 1,
 			validator(num) {
-				return num > 2 && num < 19;
+				var intreg = new RegExp('^[0-9]*[1-9][0-9]*$');
+				if(intreg.test(num)){
+					return num > 0 && num < 5;
+				} else {
+					return false;
+				}
 			}
 		}
 	},
@@ -112,7 +122,7 @@ export default {
 			district.setLevel('district');
 			district.setSubdistrict(1);
 			district.search('340503', function(status, result) {
-				console.log(result.districtList);
+				// console.log(result.districtList);
 				self.AMap.remove(polygons); //清除上次结果
 				polygons = [];
 				var bounds = result.districtList[0].boundaries;
