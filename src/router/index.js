@@ -3,6 +3,14 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+// 修复路由重复报错
+// 获取原型对象上的push函数
+const originalPush = Router.prototype.push
+// 修改原型对象中的push方法
+Router.prototype.push = function push(location) {
+	return originalPush.call(this, location).catch(err => err)
+}
+
 import store from '@/store/index.js'
 
 export const fx67llRoutes = [{
@@ -11,9 +19,14 @@ export const fx67llRoutes = [{
 		component: () => import('@v/index.vue') //首页
 	},
 	{
+		path: '/doc',
+		name: 'doc',
+		component: () => import('@c/CodeDoc.vue') // 用于展示文档
+	},
+	{
 		path: '/code',
 		name: 'code',
-		component: () => import('@c/CodeMirror.vue') // 用于展示不同代码文件
+		component: () => import('@c/CodeMirror.vue') // 用于展示源码
 	},
 	{
 		path: '/devtest',
@@ -23,12 +36,12 @@ export const fx67llRoutes = [{
 	{
 		path: '/mapcanvas',
 		name: 'mapcanvas',
-		component: () => import('@v/MapCanvas.vue') // 在高德地图上绘制canvas覆盖物
+		component: () => import('@v/Map/MapCanvas/MapCanvas.vue') // 在高德地图上绘制canvas覆盖物
 	},
 	{
 		path: '/splitarea',
 		name: 'splitarea',
-		component: () => import('@v/SplitArea.vue') // 在高德地图上绘制canvas覆盖物
+		component: () => import('@v/Map/SplitArea/SplitArea.vue') // 在高德地图上绘制canvas覆盖物
 	},
 	{
 		path: '/test',

@@ -3,8 +3,9 @@
 <!-- @version: 1.0.1-->
 <!-- @description：基于高德地图的自定义绘制封装组件，请在项目中安装underscore，需要在引入高德地图api，格式：https://webapi.amap.com/maps?key=你的秘钥&v=1.4.15 -->
 <!-- @bug: 目前已知bug是缩小到世界地图返回用自定义工具绘制，然后放大会导致之前的绘制全部消失 -->
-<!-- @update: 2020年9月25日，完成1.0.0开发 -->
-<!-- @update: 2021年1月6日，修改部分注释，并补充mapcenter只能传int的正则验证，因为该工具使用场景限定在2D模式下使用，高德官方规定2D的缩放只有int是有效的-->
+<!-- @update: 2020年9月25日-v1.0.0，完成1.0.0开发 -->
+<!-- @update: 2021年1月6日-v1.0.1，修改部分注释，并补充mapcenter只能传int的正则验证，因为该工具使用场景限定在2D模式下使用，高德官方规定2D的缩放只有int是有效的-->
+<!-- @update: 2021年1月7日-v1.0.2，添加文档查看功能-->
 
 <template>
 	<div class="map">
@@ -18,6 +19,7 @@
 			<div @click="cancel">撤销</div>
 			<div v-show="this.isDrawTestArea === false" @click="drawTest">绘制演示图形</div>
 			<div @click="showCode">查看代码</div>
+			<div @click="showDoc">查看文档</div>
 		</div>
 		<div id="map-container" ref="map"></div>
 	</div>
@@ -83,7 +85,7 @@ export default {
 		};
 	},
 	props: {
-		// 选择使用自定义工具或高德工具
+		// 选择使用自定义工具或高德官方工具
 		tooltype: {
 			type: String,
 			required: false,
@@ -92,7 +94,7 @@ export default {
 				return value === 'custom' || value === 'gaode';
 			}
 		},
-		// 地图的发布样式
+		// 地图的发布样式，需要遵守高德官方格式
 		mapstyle: {
 			type: String,
 			required: false,
@@ -551,7 +553,7 @@ export default {
 			this.mapInit();
 			this.pathArr = [];
 		},
-		// 显示当前组件源码
+		// 显示当前组件源码，提取源码请自行删除该部分相关代码
 		showCode() {
 			this.$router.push({
 				path: '/code',
@@ -559,7 +561,16 @@ export default {
 					code: 'MapCanvasCode'
 				}
 			});
-		}
+		},
+		// 显示当前组件文档，提取源码请自行删除该部分相关代码
+		showDoc() {
+			this.$router.push({
+				path: '/doc',
+				query: {
+					code: 'MapCanvasDoc'
+				}
+			});
+		},
 	}
 };
 </script>
