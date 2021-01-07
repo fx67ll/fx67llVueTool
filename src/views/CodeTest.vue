@@ -11,7 +11,7 @@ import { codemirror } from 'vue-codemirror';
 import 'codemirror/theme/3024-day.css';
 // require('codemirror/mode/javascript/javascript'); // 这里引入的模式的js，根据设置的mode引入，一定要引入！！
 require('codemirror/mode/vue/vue');
-import MapCanvasCode from '@a/file/MapCanvas.js';
+import MapCanvasCode from '@a/file/code/MapCanvas.js';
 export default {
 	name: 'Test',
 	components: {
@@ -40,11 +40,8 @@ export default {
 	computed: {
 		// 判断是否是开发环境，以决定是否显示获取转义字符的按钮，不然每次都需要注释掉再发布简直反人类
 		isDev() {
-			return process.env.VUE_APP_ENV === 'development'
+			return process.env.VUE_APP_ENV === 'development';
 		}
-	},
-	mounted() {
-		this.isDev();
 	},
 	methods: {
 		// 目前的转义字符获取非常低效，实际上是手动在页面上通过打印的方式再存储为字符串文件，后期通过前端工具或者上传后端处理的方式通用的批量返回
@@ -61,35 +58,9 @@ export default {
 </script>
 
 <style lang="less" scoped="scoped">
+@import '@a/styles/code.less'; 
 /deep/ .CodeMirror {
 	height: 100% !important;
 	// background-color: transparent !important;
-}
-.code-box {
-	width: 100%;
-	height: 100%;
-	.code-codemirror {
-		width: 100%;
-		height: 100%;
-	}
-	.code-btn {
-		position: absolute;
-		top: 60px;
-		right: 30px;
-		border: 1px solid #42b983;
-		box-shadow: 1px 1px 5px #f8f8f8;
-		z-index: 999;
-		span {
-			display: inline-block;
-			padding: 4px;
-			color: #42b983;
-			border: 1px solid #42b983;
-			.ban-user-select();
-		}
-		span:hover {
-			background-color: #42b983;
-			color: #ffffff;
-		}
-	}
 }
 </style>

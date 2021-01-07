@@ -1,8 +1,5 @@
 <template>
-	<div class="code-box">
-		<codemirror ref="mycode" :value="curCode" :options="cmOptions" class="code-codemirror"></codemirror>
-		<!-- <div class="code-btn"><span @click="getCode">获取转义代码</span></div> -->
-	</div>
+	<div class="code-box"><codemirror ref="mycode" :value="curCode" :options="cmOptions" class="code-codemirror"></codemirror></div>
 </template>
 
 <script>
@@ -14,23 +11,11 @@ import 'codemirror/theme/3024-day.css';
 // require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/vue/vue');
 // 引入不同文件的转义代码
-import MapCanvasCode from '@a/file/MapCanvas.js';
+import MapCanvasCode from '@a/file/code/MapCanvas.js';
 export default {
 	name: 'CodeMirror',
 	components: {
 		codemirror
-	},
-	mounted() {
-		var self = this;
-		switch (self.$route.query.code) {
-			case 'MapCanvasCode':
-				self.curCode = MapCanvasCode;
-				break;
-			default:
-				self.curCode =
-					'CodeMirror is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with over 100 language modes and various addons that implement more advanced editing functionality. Every language comes with fully-featured code and syntax highlighting to help with reading and editing complex code.';
-				break;
-		}
 	},
 	data() {
 		return {
@@ -51,48 +36,30 @@ export default {
 			}
 		};
 	},
+	mounted() {
+		this.initData();
+	},
 	methods: {
-		back() {
-			this.$router.go(-1);
-		},
-		getCode() {
+		initData() {
 			var self = this;
-			console.log(JSON.stringify(self.$refs.mycode.content));
+			switch (self.$route.query.code) {
+				case 'MapCanvasCode':
+					self.curCode = MapCanvasCode;
+					break;
+				default:
+					self.curCode =
+						'CodeMirror is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with over 100 language modes and various addons that implement more advanced editing functionality. Every language comes with fully-featured code and syntax highlighting to help with reading and editing complex code.';
+					break;
+			}
 		}
 	}
 };
 </script>
 
 <style lang="less" scoped="scoped">
+@import '@a/styles/code.less';
 /deep/ .CodeMirror {
 	height: 100% !important;
 	// background-color: transparent !important;
-}
-.code-box {
-	width: 100%;
-	height: 100%;
-	.code-codemirror {
-		width: 100%;
-		height: 100%;
-	}
-	.code-btn {
-		position: absolute;
-		bottom: 20px;
-		right: 30px;
-		border: 1px solid #42b983;
-		box-shadow: 1px 1px 5px #f8f8f8;
-		z-index: 999;
-		span {
-			display: inline-block;
-			padding: 4px;
-			color: #42b983;
-			border: 1px solid #42b983;
-			.ban-user-select();
-		}
-		span:hover {
-			background-color: #42b983;
-			color: #ffffff;
-		}
-	}
 }
 </style>
