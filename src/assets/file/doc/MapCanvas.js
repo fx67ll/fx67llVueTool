@@ -79,9 +79,9 @@ const MapCanvasDoc = [{
 	},
 	{
 		param: 'fillStyle',
-		descrbition: '自定义工具所绘制的多边形的填充颜色，默认填充，不填充的话isFill可以直接传false，下面的属性也不会再验证',
+		descrbition: '自定义工具所绘制的多边形的填充颜色，默认填充。不需要填充可以设置isFill为false，下面的属性也不会再验证',
 		type: 'Object',
-		chooseValue: 'gradientDirection可用值: left-top/left-bottom/right-top/right-bottom/middle-border/border-middle/top-bottom/bottom-top/left-right/right-left',
+		chooseValue: 'gradientDirection可选值: left-top/left-bottom/right-top/right-bottom/middle-border/border-middle/top-bottom/bottom-top/left-right/right-left',
 		defaultValue: `{
 					isFill: true,
 					fillColor: [
