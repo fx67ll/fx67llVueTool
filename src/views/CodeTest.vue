@@ -47,7 +47,7 @@ export default {
 		// 目前的转义字符获取非常低效，实际上是手动在页面上通过打印的方式再存储为字符串文件，后期通过前端工具或者上传后端处理的方式通用的批量返回
 		getCode() {
 			var self = this;
-			if (!JSON.stringify(self.$refs.mycode.content)) {
+			if (JSON.stringify(self.$refs.mycode.content).length > 2) {
 				console.log(JSON.stringify(self.$refs.mycode.content));
 			} else {
 				console.log('您还没输入测试代码~');
