@@ -63,6 +63,11 @@ router.beforeEach((to, from, next) => {
 	// 不是首页的话将自动显示返回按钮
 	if (to.name !== 'index') {
 		store.dispatch("setBtnStateAsync", true);
+		if(to.name === 'doc') {
+			store.dispatch("setBtnTypeAsync", 'grey');
+		}else{
+			store.dispatch("setBtnTypeAsync", 'default');
+		}
 	} else {
 		store.dispatch("setBtnStateAsync", false);
 	}

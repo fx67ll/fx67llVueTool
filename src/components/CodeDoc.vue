@@ -1,5 +1,6 @@
 <template>
 	<div class="doc-box">
+		<div class="doc-title">CanvasMap Tool Based on GaoDeMap</div>
 		<el-table :data="docData" border class="doc-table">
 			<el-table-column prop="param" label="参数"></el-table-column>
 			<el-table-column prop="descrbition" label="说明"></el-table-column>
@@ -40,13 +41,19 @@ export default {
 
 <style lang="less" scoped="scoped">
 	.doc-box{
-		width: 100%;
+		width: 1280px;
 		height: 100%;
+		margin: 0 auto;
+		.doc-title{
+			width: 100%;
+			height: 80px;
+			line-height: 80px;
+			text-align: center;
+			font-size: 28px;
+			.ban-user-select();
+		}
 		.doc-table{
-			width: 1280px;
-			margin: 0 auto;
-			position: relative;
-			top: 25px;
+			width: 100%;
 		}
 	}
 </style>

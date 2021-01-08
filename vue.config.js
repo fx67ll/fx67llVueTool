@@ -4,6 +4,7 @@ function resolve(dir) {
 	return path.join(__dirname, dir)
 }
 
+// 添加全局less文件
 function addStyleResource(rule) {
 	rule
 		.use("style-resource")

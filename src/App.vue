@@ -2,7 +2,9 @@
 	<div id="app">
 		<router-view></router-view>
 		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
-		<div v-show="this.$store.state.isShowbckbtn" class="fx67ll-bckbtn"><span @click="back">返回</span></div>
+		<div v-show="this.$store.state.isShowbckbtn" class="fx67ll-bckbtn" :class="[this.$store.state.btnType === 'default' ? '' : 'fx67ll-bckbtn-grey']">
+			<span @click="back">返回</span>
+		</div>
 		<!-- <div class="loader">
 			<div class="loader-inner pacman">
 				<div></div>
@@ -60,7 +62,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'PFR';
-	color: rgb(186, 186, 186, 1);
+	color: @grey;
 }
 #app {
 	width: 100%;
@@ -70,7 +72,7 @@ body {
 	position: absolute;
 	top: 20px;
 	right: 30px;
-	border: 1px solid #42b983;
+	border: 1px solid @green;
 	box-shadow: 1px 1px 5px #f8f8f8;
 	z-index: 999;
 }
@@ -78,19 +80,29 @@ body {
 	display: inline-block;
 	padding: 6px 6px 2px 6px;
 	.ban-user-select();
-	color: #42b983;
+	color: @green;
 	font-size: 18px;
 	line-height: 22px;
-	border: 1px solid #42b983;
+	border: 1px solid @green;
 }
 .fx67ll-bckbtn span:hover {
-	background-color: #42b983;
+	background-color: @green;
 	color: #ffffff;
+}
+.fx67ll-bckbtn-grey {
+	border: 1px solid @grey;
+}
+.fx67ll-bckbtn-grey span {
+	color: @grey;
+	border: 1px solid @grey;
+}
+.fx67ll-bckbtn-grey span:hover {
+	background-color: @grey;
 }
 // .loader {
 // 	width: 100px;
 // 	padding: 10px;
-// 	background-color: #42b983;
+// 	background-color: @green;
 // 	border-radius: 12px;
 // 	position: absolute;
 // 	top: 20px;

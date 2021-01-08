@@ -58,7 +58,7 @@ export default {
 			font-size: 36px;
 		}
 		// span:hover {
-		// 	color: #42b983;
+		// 	color: @green;
 		// }
 	}
 	.fx67ll-link {
@@ -72,7 +72,7 @@ export default {
 				font-size: 24px;
 			}
 			span:hover {
-				color: #42b983;
+				color: @green;
 			}
 		}
 	}
