@@ -258,7 +258,7 @@ export default {
 							fillCo: '#ffaaff'
 						}
 					],
-					gradientDirection: 'right-bottom' //可用值: left-top left-bottom right-top right-bottom middle-border border-middle top-bottom bottom-top left-right right-left
+					gradientDirection: 'right-bottom' //可选值: left-top left-bottom right-top right-bottom middle-border border-middle top-bottom bottom-top left-right right-left
 				};
 				return obj;
 			},
