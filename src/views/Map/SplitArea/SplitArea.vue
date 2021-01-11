@@ -58,28 +58,97 @@ export default {
 			required: false,
 			default: 13,
 			validator(num) {
-				var intreg = new RegExp('^[0-9]*[1-9][0-9]*$');
-				if (intreg.test(num)) {
-					return num > 2 && num < 19;
-				} else {
-					return false;
-				}
+				return new RegExp('^[0-9]*[1-9][0-9]*$').test(num) && num > 2 && num < 19;
 			}
 		},
-		// 查询级别，1国家，2省份，3市，4区县，默认显示整个中国的地图
+		// 显示的行政区级别，1国家，2省份，3市，4区县，默认显示整个中国的轮廓线
 		searchLevel: {
 			type: Number,
 			required: false,
 			default: 1,
 			validator(num) {
-				var intreg = new RegExp('^[0-9]*[1-9][0-9]*$');
-				if (intreg.test(num)) {
-					return num > 0 && num < 5;
+				return new RegExp('^[0-9]*[1-9][0-9]*$').test(num) && num > 0 && num < 5;
+			}
+		},
+		// 显示的下级行政区级数，可选值是0/1/2/3，默认是1显示下一级行政区的轮廓线，0代表不显示下级区域，1/2/3若下级不够会在控制台返回错误信息提示
+		subsNum: {
+			type: Number,
+			required: false,
+			default: 1,
+			validator(num) {
+				return new RegExp('^[0-9]*[0-9][0-9]*$').test(num) && num < 4;
+			}
+		},
+		// 行政区域轮廓线的样式，请严格按照对象中的参数传递
+		strokeStyle: {
+			type: Object,
+			required: false,
+			default: function() {
+				var obj = {
+					isShow: true, // 表示是否需要绘制行政区的轮廓线，不绘制的话可以直接传false，下面的属性也不会再验证
+					isShowSubs: true, // 表示是否需要绘制下级行政区的轮廓线，不绘制的话直接传false，但是如果属性subsNum的值为0则强制默认是false，
+					style: {
+						strokeColor: '#0091ea', // 线条的颜色，值为十六进制颜色码
+						strokeWeight: 1, // 线条的宽度，值为正整数
+						strokeLine: 'solid', // 线条的虚实，可选值为solid/dashed，对应高德地图的原始属性strokeStyle
+						strokeOpacity: 1.2, // 线条的透明度，值为0~1之间保留一位小数的浮点数
+						strokeDasharray: [0] // 虚线条的间隙样式，使用实线时传入[0]即可，使用虚线时该参数详情请参考SVG中的stroke-dasharray，必要时请自行查阅相关资料(参考博客https://www.cnblogs.com/daisygogogo/p/11044353.html)
+					}
+				};
+				return obj;
+			},
+			validator(obj) {
+				if (obj.hasOwnProperty('isShow') || typeof obj.isShow !== 'boolean') {
+					if (obj.isShow === true) {
+						if (obj.hasOwnProperty('isShowSubs') || typeof obj.isShowSubs !== 'boolean') {
+							if (obj.hasOwnProperty('style')) {
+								var style = obj.style;
+								if (
+									style.hasOwnProperty('strokeColor') &&
+									style.hasOwnProperty('strokeWeight') &&
+									style.hasOwnProperty('strokeLine') &&
+									style.hasOwnProperty('strokeOpacity') &&
+									style.hasOwnProperty('strokeDasharray')
+								) {
+									if (
+										new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(style.strokeColor) &&
+										new RegExp('^[0-9]*[1-9][0-9]*$').test(style.strokeWeight) &&
+										new RegExp('^[0-1]{1}(.{1,2})?$').test(style.strokeOpacity) &&
+										(style.strokeLine === 'solid' || style.strokeLine === 'dashed')
+									) {
+										if (Array.isArray(style.strokeDasharray)) {
+											var isValid = true;
+											_.each(style.strokeDasharray, function(item, key) {
+												if (!new RegExp('^[0-9]*[0-9][0-9]*$').test(item)) {
+													isValid = false;
+												}
+											});
+											return isValid;
+										} else {
+											return false;
+										}
+									} else {
+										return false;
+									}
+								} else {
+									return false;
+								}
+							} else {
+								return false;
+							}
+						} else {
+							return false;
+						}
+					} else {
+						return true;
+					}
 				} else {
 					return false;
 				}
 			}
-		}
+		},
+		// 行政区域填充的样式，请严格按照对象中的参数传递
+		fillStyle: {}
 	},
 	mounted() {
 		this.mapInit();
@@ -173,7 +242,7 @@ export default {
 					code: 'SplitAreaDoc'
 				}
 			});
-		},
+		}
 	}
 };
 </script>
