@@ -1,6 +1,6 @@
 <template>
 	<div class="doc-box">
-		<div class="doc-title">CanvasMap Tool Based on GaoDeMap</div>
+		<div class="doc-title">{{ docData.description }}</div>
 		<el-table :data="docData.Attributes" v-if="docData.Attributes.length > 0" border class="doc-table">
 			<el-table-column prop="param" label="参数"></el-table-column>
 			<el-table-column prop="descrbition" label="说明"></el-table-column>

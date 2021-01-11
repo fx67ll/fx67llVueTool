@@ -1,4 +1,5 @@
 const MapCanvasDoc = {
+	description: '基于高德地图的简易画布绘制工具',
 	Attributes: [{
 			param: 'tooltype',
 			descrbition: '选择使用自定义工具或高德官方工具，高德官方工具的方法后期有空再写，这个属性先放这里没什么卵用',
