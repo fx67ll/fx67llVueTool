@@ -4,8 +4,7 @@
 <!-- @description：基于高德地图的自定义绘制封装组件，请在项目中安装underscore，需要在引入高德地图api，格式：https://webapi.amap.com/maps?key=你的秘钥&v=1.4.15 -->
 <!-- @bug: 目前已知bug是缩小到世界地图返回用自定义工具绘制，然后放大会导致之前的绘制全部消失 -->
 <!-- @update: 2020年9月25日-v1.0.0，完成1.0.0开发 -->
-<!-- @update: 2021年1月6日-v1.0.1，修改部分注释，并补充mapcenter只能传int的正则验证，因为该工具使用场景限定在2D模式下使用，高德官方规定2D的缩放只有int是有效的-->
-<!-- @update: 2021年1月7日-v1.0.2，添加文档查看功能-->
+<!-- @update: 2021年1月7日-v1.0.1，添加文档查看功能-->
 
 <template>
 	<div class="map">
@@ -85,7 +84,7 @@ export default {
 		};
 	},
 	props: {
-		// 选择使用自定义工具或高德官方工具
+		// 选择使用自定义工具或高德官方工具，高德官方工具的方法后期有空再写，这个属性先放这里没什么卵用
 		tooltype: {
 			type: String,
 			required: false,
@@ -120,21 +119,16 @@ export default {
 				}
 			}
 		},
-		// 地图的初始化缩放比例
+		// 地图的初始化缩放比例，值为正整数
 		mapzoom: {
 			type: Number,
 			required: false,
 			default: 13,
 			validator(num) {
-				var intreg = new RegExp('^[0-9]*[1-9][0-9]*$');
-				if(intreg.test(num)){
-					return num > 2 && num < 19;
-				} else {
-					return false;
-				}
+				return new RegExp('^[0-9]*[1-9][0-9]*$').test(num) && num > 2 && num < 19;
 			}
 		},
-		// 线条的宽度
+		// 线条的宽度，值为正整数
 		strokeWidth: {
 			type: Number,
 			required: false,
@@ -148,10 +142,11 @@ export default {
 			type: Array,
 			required: false,
 			default: function() {
+				// 如果只想用一种颜色，那可以去用高德自带的画图工具，没有必要使用自定义的canvas画图工具
 				var arr = [
 					{
-						opacityPos: 0, // 如果只想用一种颜色，那可以去用高德自带的画图工具，没有必要使用自定义的canvas画图工具
-						strokeCo: '#ffff00'
+						opacityPos: 0, // 当前颜色在当前线条中的位置，值为0~1之间保留一位小数的浮点数
+						strokeCo: '#ffff00' // 当前位置的线条颜色，值为十六进制颜色码
 					},
 					{
 						opacityPos: 0.2,
@@ -196,23 +191,23 @@ export default {
 				}
 			}
 		},
-		// 阴影样式
+		// 阴影样式，请严格按照对象中的参数传递
 		shadowStyle: {
 			type: Object,
 			required: false,
 			default: function() {
 				var obj = {
-					shadowColor: '#D3D3D3',
-					shadowBlur: 5,
-					shadowOffsetX: 20,
-					shadowOffsetY: 20
+					shadowColor: '#D3D3D3', // 阴影的颜色，值为十六进制颜色码
+					shadowBlur: 5, // 阴影的模糊级数，值为正整数
+					shadowOffsetX: 20, // 返回形状与阴影的水平距离，值为正整数
+					shadowOffsetY: 20 // 返回形状与阴影的垂直距离，值为正整数
 				};
 				return obj;
 			},
 			validator(obj) {
 				if (obj.hasOwnProperty('shadowColor') && obj.hasOwnProperty('shadowBlur') && obj.hasOwnProperty('shadowOffsetX') && obj.hasOwnProperty('shadowOffsetY')) {
 					if (new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(obj.shadowColor)) {
-						if (typeof obj.shadowBlur === 'number' && typeof obj.shadowOffsetX === 'number' && typeof obj.shadowOffsetY === 'number') {
+						if (new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowBlur) && new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowOffsetX) && new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowOffsetY)) {
 							return true;
 						} else {
 							return false;
@@ -225,14 +220,15 @@ export default {
 				}
 			}
 		},
-		// 多边形的填充颜色，从这里继续写参数
+		// 多边形的填充颜色
 		fillStyle: {
 			type: Object,
 			required: false,
 			default: function() {
 				var obj = {
-					isFill: true, // 默认填充，不填充的话可以直接传false，下面的属性也不会再验证
+					isFill: true, // 表示连接所有线段绘制封闭图形后是否需要填充，不填充的话可以直接传false，下面的属性也不会再验证
 					fillColor: [
+						// 表示填充的颜色，属性参考strokeColor
 						{
 							opacityPos: 0,
 							fillCo: '#aaff7f'
@@ -258,12 +254,12 @@ export default {
 							fillCo: '#ffaaff'
 						}
 					],
-					gradientDirection: 'right-bottom' //可选值: left-top left-bottom right-top right-bottom middle-border border-middle top-bottom bottom-top left-right right-left
+					gradientDirection: 'right-bottom' // 表示填充颜色的渐变方向，可选值: left-top left-bottom right-top right-bottom middle-border border-middle top-bottom bottom-top left-right right-left
 				};
 				return obj;
 			},
 			validator(obj) {
-				if (obj.hasOwnProperty('isFill') || typeof obj.isFill !== boolean) {
+				if (obj.hasOwnProperty('isFill') || typeof obj.isFill !== 'boolean') {
 					if (obj.isFill === true) {
 						if (obj.hasOwnProperty('fillColor')) {
 							var vaildNum = 0;
@@ -570,7 +566,7 @@ export default {
 					code: 'MapCanvasDoc'
 				}
 			});
-		},
+		}
 	}
 };
 </script>
