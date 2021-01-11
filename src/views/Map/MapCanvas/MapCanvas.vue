@@ -207,7 +207,11 @@ export default {
 			validator(obj) {
 				if (obj.hasOwnProperty('shadowColor') && obj.hasOwnProperty('shadowBlur') && obj.hasOwnProperty('shadowOffsetX') && obj.hasOwnProperty('shadowOffsetY')) {
 					if (new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(obj.shadowColor)) {
-						if (new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowBlur) && new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowOffsetX) && new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowOffsetY)) {
+						if (
+							new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowBlur) &&
+							new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowOffsetX) &&
+							new RegExp('^[0-9]*[1-9][0-9]*$').test(obj.shadowOffsetY)
+						) {
 							return true;
 						} else {
 							return false;
@@ -408,13 +412,17 @@ export default {
 		drawTestArea(testData) {
 			var self = this;
 			this.isDrawTestArea = true;
-			self.initCanvasContext(self.AMap, self.strokeWidth, self.shadowStyle);
-			_.each(testData, function(item, key) {
-				if (key !== testData.length - 1) {
-					self.drawLineByPostion(self.AMap, self.CanvasContext, self.strokeColor, testData[key].x, testData[key].y, testData[key + 1].x, testData[key + 1].y);
-				}
-			});
-			self.drawByPath(self.AMap, self.CanvasContext, testData);
+			self.AMap.setZoomAndCenter(13, [118.779611, 32.016625]);
+			// 这里可以继续优化，暂且使用延时绘制的方式
+			setTimeout(function() {
+				self.initCanvasContext(self.AMap, self.strokeWidth, self.shadowStyle);
+				_.each(testData, function(item, key) {
+					if (key !== testData.length - 1) {
+						self.drawLineByPostion(self.AMap, self.CanvasContext, self.strokeColor, testData[key].x, testData[key].y, testData[key + 1].x, testData[key + 1].y);
+					}
+				});
+				self.drawByPath(self.AMap, self.CanvasContext, testData);
+			}, 500);
 		},
 		// 处理线渐变
 		handleStrokeGadient(context, strokecolor, startpixel, endpixel) {
