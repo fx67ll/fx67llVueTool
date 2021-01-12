@@ -2,7 +2,11 @@
 	<div id="app">
 		<router-view></router-view>
 		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
-		<div v-show="this.$store.state.isShowbckbtn" class="fx67ll-bckbtn" :class="[this.$store.state.btnType === 'default' ? '' : 'fx67ll-bckbtn-grey']">
+		<div
+			v-show="this.$store.state.isShowbckbtn"
+			class="fx67ll-bckbtn"
+			:class="[this.$store.state.btnType === 'default' ? '' : this.$store.state.btnType === 'doc' ? 'fx67ll-bckbtn-grey' : 'fx67ll-bckbtn-red']"
+		>
 			<span @click="back">返回</span>
 		</div>
 		<!-- <div class="loader">
@@ -89,6 +93,7 @@ body {
 	background-color: @green;
 	color: #ffffff;
 }
+// 文档中使用的灰色按钮
 .fx67ll-bckbtn-grey {
 	border: 1px solid @grey;
 }
@@ -98,6 +103,17 @@ body {
 }
 .fx67ll-bckbtn-grey span:hover {
 	background-color: @grey;
+}
+// 开发中的组件使用的红色按钮
+.fx67ll-bckbtn-red {
+	border: 1px solid @red;
+}
+.fx67ll-bckbtn-red span {
+	color: @red;
+	border: 1px solid @red;
+}
+.fx67ll-bckbtn-red span:hover {
+	background-color: @red;
 }
 // .loader {
 // 	width: 100px;
