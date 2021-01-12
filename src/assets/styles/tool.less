@@ -1,0 +1,30 @@
+.tool-box {
+	position: absolute;
+	top: 20px;
+	left: 30px;
+	z-index: 1000;
+	border: 1px solid #42b983;
+	box-shadow: 1px 1px 5px #f8f8f8;
+	div {
+		cursor: pointer;
+		padding: 4px;
+		border: 1px solid #42b983;
+		.ban-user-select();
+	}
+	div:hover {
+		background-color: #42b983;
+		color: #ffffff;
+	}
+}
+
+.tool-box-inDev{
+	border: 1px solid @red;
+	.tool-inDev {
+		color: @red;
+		border: 1px solid @red;
+	}
+	.tool-inDev:hover {
+		background-color: @red;
+		color: #ffffff;
+	}
+}

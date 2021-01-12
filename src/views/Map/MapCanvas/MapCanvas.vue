@@ -8,7 +8,7 @@
 
 <template>
 	<div class="map">
-		<div class="tool-container">
+		<div class="tool-box">
 			<div v-show="this.tooltype === 'custom'" @click="checkArea">
 				<span v-show="this.isCheckArea === false">确定绘制区域</span>
 				<span v-show="this.isCheckArea === true">重新确定绘制区域</span>
@@ -602,24 +602,6 @@ export default {
 		width: 100%;
 		height: 100%;
 		position: relative;
-	}
-	.tool-container {
-		position: absolute;
-		top: 20px;
-		left: 30px;
-		z-index: 1000;
-		border: 1px solid #42b983;
-		box-shadow: 1px 1px 5px #f8f8f8;
-		div {
-			cursor: pointer;
-			padding: 4px;
-			border: 1px solid #42b983;
-			.ban-user-select();
-		}
-		div:hover {
-			background-color: #42b983;
-			color: #ffffff;
-		}
 	}
 }
 </style>

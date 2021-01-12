@@ -6,11 +6,11 @@
 
 <template>
 	<div class="map">
-		<!-- <div class="tool-container">
+		<!-- <div class="tool-box">
 			<div @click="showCode">查看代码</div>
 			<div @click="showDoc">查看文档</div>
 		</div> -->
-		<div class="tool-container"><div class="inDev">该组件开发中，尚不提供源码查看</div></div>
+		<div class="tool-box tool-box-inDev"><div class="tool-inDev">该组件开发中，尚不提供源码查看</div></div>
 		<div id="map-container" ref="map"></div>
 	</div>
 </template>
@@ -266,33 +266,6 @@ export default {
 		width: 100%;
 		height: 100%;
 		position: relative;
-	}
-	.tool-container {
-		position: absolute;
-		top: 20px;
-		left: 30px;
-		z-index: 1000;
-		// border: 1px solid @green;
-		border: 1px solid #ef8e81;
-		box-shadow: 1px 1px 5px #f8f8f8;
-		div {
-			cursor: pointer;
-			padding: 4px;
-			border: 1px solid @green;
-			.ban-user-select();
-		}
-		div:hover {
-			background-color: @green;
-			color: #ffffff;
-		}
-		.inDev {
-			color: #ef8e81;
-			border: 1px solid #ef8e81;
-		}
-		.inDev:hover {
-			background-color: #ef8e81;
-			color: #ffffff;
-		}
 	}
 }
 </style>
