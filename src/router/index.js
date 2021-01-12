@@ -29,6 +29,11 @@ export const fx67llRoutes = [{
 		component: () => import('@c/CodeMirror.vue') // 用于展示源码
 	},
 	{
+		path: '/test',
+		name: 'test',
+		component: () => import('@v/CodeTest.vue') // 代码测试页面
+	},
+	{
 		path: '/devtest',
 		name: 'devtest',
 		component: () => import('@c/ComponentTest.vue') // 本地编写组件时候使用的测试页面
@@ -44,9 +49,9 @@ export const fx67llRoutes = [{
 		component: () => import('@v/Map/SplitArea/SplitArea.vue') // 在高德地图上绘制canvas覆盖物
 	},
 	{
-		path: '/test',
-		name: 'test',
-		component: () => import('@v/CodeTest.vue') // 代码测试页面
+		path: '/threetest',
+		name: 'threetest',
+		component: () => import('@v/Three/HelloThree.vue') // Threejs学习
 	}
 ]
 
@@ -64,7 +69,9 @@ router.beforeEach((to, from, next) => {
 	if (to.name !== 'index') {
 		store.dispatch("setBtnStateAsync", true);
 		if(to.name === 'doc') {
-			store.dispatch("setBtnTypeAsync", 'grey');
+			store.dispatch("setBtnTypeAsync", 'doc');
+		}else if(to.name === 'splitarea' || to.name === 'threetest'){
+			store.dispatch("setBtnTypeAsync", 'dev');
 		}else{
 			store.dispatch("setBtnTypeAsync", 'default');
 		}
