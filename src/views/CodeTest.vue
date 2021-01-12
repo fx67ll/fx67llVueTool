@@ -58,7 +58,6 @@ export default {
 </script>
 
 <style lang="less" scoped="scoped">
-@import '@a/styles/code.less'; 
 /deep/ .CodeMirror {
 	height: 100% !important;
 	// background-color: transparent !important;
