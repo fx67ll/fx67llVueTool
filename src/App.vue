@@ -9,15 +9,6 @@
 		>
 			<span @click="back">返回</span>
 		</div>
-		<!-- <div class="loader">
-			<div class="loader-inner pacman">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
-		</div> -->
 	</div>
 </template>
 
@@ -115,13 +106,4 @@ body {
 .fx67ll-bckbtn-red span:hover {
 	background-color: @red;
 }
-// .loader {
-// 	width: 100px;
-// 	padding: 10px;
-// 	background-color: @green;
-// 	border-radius: 12px;
-// 	position: absolute;
-// 	top: 20px;
-// 	right: 20px;
-// }
 </style>

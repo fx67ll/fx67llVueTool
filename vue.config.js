@@ -10,8 +10,10 @@ function addStyleResource(rule) {
 		.use("style-resource")
 		.loader("style-resources-loader")
 		.options({
-			patterns: [path.resolve(__dirname, "./src/assets/styles/mixin.less"), path.resolve(__dirname,
-				"./src/assets/styles/loader.less")],
+			// 这里暂时保留加载多个全局less的方式
+			// patterns: [path.resolve(__dirname, "./src/assets/styles/mixin.less"), path.resolve(__dirname,
+			// 	"./src/assets/styles/test.less")],
+			patterns: [path.resolve(__dirname, "./src/assets/styles/mixin.less")],
 		})
 }
 
