@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
 		store.dispatch("setBtnStateAsync", true);
 		if(to.name === 'doc') {
 			store.dispatch("setBtnTypeAsync", 'doc');
-		}else if(to.name === 'splitarea' || to.name === 'threetest'){
+		}else if(to.name === 'splitarea'){
 			store.dispatch("setBtnTypeAsync", 'dev');
 		}else{
 			store.dispatch("setBtnTypeAsync", 'default');
