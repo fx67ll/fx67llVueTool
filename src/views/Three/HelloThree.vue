@@ -6,7 +6,7 @@
 import * as THREE from 'three/build/three.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 export default {
-	name: 'threetest',
+	name: 'hellothree',
 	data() {
 		return {};
 	},

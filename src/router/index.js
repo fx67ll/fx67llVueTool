@@ -49,9 +49,14 @@ export const fx67llRoutes = [{
 		component: () => import('@v/Map/SplitArea/SplitArea.vue') // 在高德地图上绘制canvas覆盖物
 	},
 	{
-		path: '/threetest',
-		name: 'threetest',
-		component: () => import('@v/Three/HelloThree.vue') // Threejs学习
+		path: '/hellothree',
+		name: 'hellothree',
+		component: () => import('@v/Three/HelloThree.vue') // Threejs Hello World
+	},
+	{
+		path: '/testthree',
+		name: 'testthree',
+		component: () => import('@v/Three/TestThree.vue') // Threejs Hello World
 	}
 ]
 
