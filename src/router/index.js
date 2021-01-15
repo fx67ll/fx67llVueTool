@@ -56,7 +56,12 @@ export const fx67llRoutes = [{
 	{
 		path: '/testthree',
 		name: 'testthree',
-		component: () => import('@v/Three/TestThree.vue') // Threejs Hello World
+		component: () => import('@v/Three/TestThree.vue') // Threejs为医院项目的测试案例
+	},
+	{
+		path: '/testnode',
+		name: 'testnode',
+		component: () => import('@v/Node/TestNode.vue') // Nodejs 接口联调测试地址
 	}
 ]
 
