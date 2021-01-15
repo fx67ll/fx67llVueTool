@@ -7,7 +7,8 @@
 			<div class="fx67ll-link-item"><router-link tag="span" to="/mapcanvas">CanvasMap Tool Based on GaoDeMap</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/splitarea">SpliteArea Tool Based on GaoDeMap</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/hellothree">Threejs Hello World</router-link></div>
-			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree">Threejs Test For The Dentist</router-link></div>
+			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree">Threejs Test For The Miku</router-link></div>
+			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/testnode">Nodejs Test Interface Based on Express & MongoDB</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/test">Code Test Tool</router-link></div>
 			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/devtest">Component Test Tool</router-link></div>
 		</div>

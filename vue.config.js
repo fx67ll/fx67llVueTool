@@ -52,17 +52,17 @@ module.exports = {
 	// 配置连接后台的代理问题
 	devServer: {
 		// host: '0.0.0.0',
-		// port: port,
+		port: 1513,
 		open: false,
-		// proxy: {
-		// 	[process.env.VUE_APP_BASE_API]: {
-		// 		target: ``,
-		// 		changeOrigin: true,
-		// 		pathRewrite: {
-		// 			['^' + process.env.VUE_APP_BASE_API]: ''
-		// 		}
-		// 	}
-		// },
+		proxy: {
+			[process.env.VUE_APP_BASE_API]: {
+				target: `http://localhost:3000`,
+				changeOrigin: true,
+				pathRewrite: {
+					['^' + process.env.VUE_APP_BASE_API]: ''
+				}
+			}
+		},
 		// disableHostCheck: true
 	},
 }
