@@ -31,6 +31,10 @@ export default {
 			time: 0
 		};
 	},
+	mounted() {
+		// 这里需要存储一下Ammo的依赖
+		this.$store.commit('SETAMMO', Ammo());
+	},
 	methods: {
 		back() {
 			if (window.history.length <= 1) {

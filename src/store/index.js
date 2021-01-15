@@ -5,7 +5,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
 	state: {
 		isShowbckbtn: false,
-		btnType: 'default'
+		btnType: 'default',
+		Ammo: null
 	},
 	// 类似computed计算属性，用于从store的state中派生出一些状态，例如过滤并计算，目前来说用不到
 	// getters: {
@@ -23,6 +24,10 @@ const store = new Vuex.Store({
 		// 同步设置bckbtn的类型
 		SETBTNTYPE(state, value) {
 			state.btnType = value;
+		},
+		// 存储Ammo
+		SETAMMO(state, value) {
+			state.Ammo = value;
 		}
 	},
 	// 专注于业务代码，可以进行异步操作
