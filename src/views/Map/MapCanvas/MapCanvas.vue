@@ -145,7 +145,7 @@ export default {
 				// 如果只想用一种颜色，那可以去用高德自带的画图工具，没有必要使用自定义的canvas画图工具
 				var arr = [
 					{
-						opacityPos: 0, // 当前颜色在当前线条中的位置，值为0~1之间保留一位小数的浮点数
+						opacityPos: 0, // 当前颜色在当前线条中的位置，值为0~1之间最多保留两位小数的浮点数，包括0和1
 						strokeCo: '#ffff00' // 当前位置的线条颜色，值为十六进制颜色码
 					},
 					{
@@ -176,7 +176,7 @@ export default {
 				if (arr.length > 0) {
 					_.each(arr, function(item, key) {
 						if (item.hasOwnProperty('opacityPos') && item.hasOwnProperty('strokeCo')) {
-							if (new RegExp('^[0-1]{1}(.{1,2})?$').test(item.opacityPos)) {
+							if (new RegExp('^(0(\.\d{1,2})?|1(\.0{1,2})?)$').test(item.opacityPos)) {
 								if (new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(item.strokeCo)) {
 									vaildNum = vaildNum + 1;
 								}
@@ -270,7 +270,7 @@ export default {
 							if (obj.fillColor.length > 0) {
 								_.each(obj.fillColor, function(item, key) {
 									if (item.hasOwnProperty('opacityPos') && item.hasOwnProperty('fillCo')) {
-										if (new RegExp('^[0-1]{1}(.{1,2})?$').test(item.opacityPos)) {
+										if (new RegExp('^(0(\.\d{1,2})?|1(\.0{1,2})?)$').test(item.opacityPos)) {
 											if (new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(item.fillCo)) {
 												vaildNum = vaildNum + 1;
 											}
