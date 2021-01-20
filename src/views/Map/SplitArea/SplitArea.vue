@@ -91,7 +91,7 @@ export default {
 						strokeColor: '#0091ea', // 线条的颜色，值为十六进制颜色码
 						strokeWeight: 1, // 线条的宽度，值为正整数
 						strokeLine: 'solid', // 线条的虚实，可选值为solid/dashed，对应高德地图的原始属性strokeStyle
-						strokeOpacity: 1.2, // 线条的透明度，值为0~1之间保留一位小数的浮点数
+						strokeOpacity: 1.2, // 线条的透明度，值为0~1之间最多保留两位小数的浮点数，包括0和1
 						strokeDasharray: [0] // 虚线条的间隙样式，使用实线时传入[0]即可，使用虚线时该参数详情请参考SVG中的stroke-dasharray，必要时请自行查阅相关资料(参考博客https://www.cnblogs.com/daisygogogo/p/11044353.html)
 					}
 				};
@@ -113,7 +113,7 @@ export default {
 									if (
 										new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(style.strokeColor) &&
 										new RegExp('^[0-9]*[1-9][0-9]*$').test(style.strokeWeight) &&
-										new RegExp('^[0-1]{1}(.{1,2})?$').test(style.strokeOpacity) &&
+										new RegExp('^(0(\.\d{1,2})?|1(\.0{1,2})?)$').test(style.strokeOpacity) &&
 										(style.strokeLine === 'solid' || style.strokeLine === 'dashed')
 									) {
 										if (Array.isArray(style.strokeDasharray)) {
@@ -148,7 +148,24 @@ export default {
 			}
 		},
 		// 行政区域填充的样式，请严格按照对象中的参数传递
-		fillStyle: {}
+		fillStyle: {
+			type: Object,
+			required: false,
+			default: function() {
+				var obj = {
+					isShow: true, // 表示是否需要绘制行政区的填充色，不绘制的话可以直接传false，下面的属性也不会再验证
+					style: {
+						fillColor: '#80d8ff', // 填充的颜色，值为十六进制颜色码
+						fillOpacity: 0.4, // 填充色的透明度，值为0~1之间最多保留两位小数的浮点数，包括0和1
+						hoverOpcity: 0.8 // 鼠标悬浮上去之后的填充色透明度，值为0~1之间最多保留两位小数的浮点数，包括0和1
+					}
+				};
+				return obj;
+			},
+			validator(obj) {
+				// 20210120抓紧时间推进
+			}
+		}
 	},
 	mounted() {
 		this.mapInit();
