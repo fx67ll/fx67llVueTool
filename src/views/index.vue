@@ -65,7 +65,10 @@ export default {
 		// }
 	}
 	.fx67ll-link {
-		padding: 50px 100px;
+		max-height: calc(~"100% - 293px");
+		overflow: auto;
+		padding: 0 100px;
+		margin: 50px 0;
 		.fx67ll-link-item{
 			width: 100%;
 			margin-bottom: 25px;
