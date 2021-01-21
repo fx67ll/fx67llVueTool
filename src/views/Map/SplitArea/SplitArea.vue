@@ -163,7 +163,36 @@ export default {
 				return obj;
 			},
 			validator(obj) {
-				// 20210120抓紧时间推进
+				if (obj.hasOwnProperty('isShow') || typeof obj.isShow !== 'boolean') {
+					if (obj.isShow === true) {
+						if (obj.hasOwnProperty('style')) {
+							var style = obj.style;
+							if (
+								style.hasOwnProperty('fillColor') &&
+								style.hasOwnProperty('fillOpacity') &&
+								style.hasOwnProperty('hoverOpcity')
+							) {
+								if (
+									new RegExp('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(style.fillColor) &&
+									new RegExp('^(0(\.\d{1,2})?|1(\.0{1,2})?)$').test(style.fillOpacity) &&
+									new RegExp('^(0(\.\d{1,2})?|1(\.0{1,2})?)$').test(style.hoverOpcity)
+								) {
+									return true;
+								} else {
+									return false;
+								}
+							} else {
+								return false;
+							}
+						} else {
+							return false;
+						}
+					} else {
+						return true;
+					}
+				} else {
+					return false;
+				}
 			}
 		}
 	},
