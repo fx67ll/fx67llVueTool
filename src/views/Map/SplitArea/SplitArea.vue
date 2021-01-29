@@ -91,7 +91,7 @@ export default {
 						strokeColor: '#0091ea', // 线条的颜色，值为十六进制颜色码
 						strokeWeight: 1, // 线条的宽度，值为正整数
 						strokeLine: 'solid', // 线条的虚实，可选值为solid/dashed，对应高德地图的原始属性strokeStyle
-						strokeOpacity: 1.2, // 线条的透明度，值为0~1之间最多保留两位小数的浮点数，包括0和1
+						strokeOpacity: 1.00, // 线条的透明度，值为0~1之间最多保留两位小数的浮点数，包括0和1
 						strokeDasharray: [0] // 虚线条的间隙样式，使用实线时传入[0]即可，使用虚线时该参数详情请参考SVG中的stroke-dasharray，必要时请自行查阅相关资料(参考博客https://www.cnblogs.com/daisygogogo/p/11044353.html)
 					}
 				};
@@ -194,7 +194,9 @@ export default {
 					return false;
 				}
 			}
-		}
+		},
+		// 接下来就是考虑是否要传入的悬浮窗口html了，动态数据该怎么实现
+		windowHtml: {}
 	},
 	mounted() {
 		this.mapInit();
