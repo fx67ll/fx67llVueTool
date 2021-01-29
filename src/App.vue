@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<router-view></router-view>
-		<vueCanvasNest :config="nestConfig" :el="'#app'"></vueCanvasNest>
+		<vueCanvasNest :config="nestConfig" :el="'#app'" v-if="isLoadingCompleted"></vueCanvasNest>
 		<div
 			v-show="this.$store.state.isShowbckbtn"
 			class="fx67ll-bckbtn"
@@ -28,14 +28,36 @@ export default {
 				count: 99, // the number of lines, default: 99
 				zIndex: -1 // the index of z space, default: -1
 			},
-			time: 0
+			time: 0, // 用于判断是否第一次加载AMMO
+			isLoadingCompleted: false
 		};
 	},
 	mounted() {
+		var self = this;
 		// 这里需要存储一下Ammo的依赖
 		this.$store.commit('SETAMMO', Ammo());
+		var loadingTimer = setTimeout(function() {
+			self.isLoadingCompleted = true;
+			clearTimeout(loadingTimer);
+		}, 100);
+		// 在控制台输出一下canvas-nest展开的时间
+		// 不过好像异步处理一下的canvas-nest会自己全部展开了
+		this.showSeconds(1);
 	},
 	methods: {
+		showSeconds(time) {
+			var self = this;
+			var consoleTimer = setTimeout(function() {
+				// console.log(`Waiting canvas-nest spread out......${time}s`);
+				// console.log(`canvas-nest is spread out!`);
+				console.log('code is magic!');
+				if (!self.isLoadingCompleted) {
+					self.showSeconds(time + 1);
+				} else {
+					clearTimeout(consoleTimer);
+				}
+			}, 100);
+		},
 		back() {
 			if (window.history.length <= 1) {
 				this.$router.push({ path: '/' });
