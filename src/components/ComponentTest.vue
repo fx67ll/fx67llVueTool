@@ -1,7 +1,7 @@
 <template>
 	<div class="component-box">
 		<!-- <MapCanvas :mapzoom="15" :strokeWidth="20" :strokeColor="mapcanvas.strokeColor" :shadowStyle="mapcanvas.shadowStyle" :fillStyle="mapcanvas.fillStyle"></MapCanvas> -->
-		<SplitArea></SplitArea>
+		<SplitArea :searchLevel="splitarea.searchLevel" :subsNum="splitarea.subsNum" :strokeStyle="splitarea.strokeStyle" :fillStyle="splitarea.fillStyle"></SplitArea>
 	</div>
 </template>
 
@@ -15,6 +15,31 @@ export default {
 	},
 	data() {
 		return {
+			// splitarea组件测试参数
+			splitarea: {
+				searchLevel: 3,
+				subsNum: 1,
+				strokeStyle: {
+					sShow: true,
+					isShowSubs: true,
+					style: {
+						strokeColor: '#0091ea',
+						strokeWeight: 5,
+						strokeLine: 'solid',
+						strokeOpacity: 0.99,
+						strokeDasharray: [0]
+					}
+				},
+				fillStyle: {
+					isShow: true,
+					style: {
+						fillColor: '#80d8ff',
+						fillOpacity: 0.29,
+						hoverOpcity: 0.69 
+					}
+				}
+			},
+			// mapcanvas组件测试参数
 			mapcanvas: {
 				strokeColor: [
 					{
