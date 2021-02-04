@@ -2,4 +2,3 @@
 /.gitignore
 /package-lock.json
 /dist/
-/src/views/index/
