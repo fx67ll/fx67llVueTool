@@ -3,6 +3,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 const store = new Vuex.Store({
+	// 存储全局变量
 	state: {
 		isShowbckbtn: false,
 		btnType: 'default',
