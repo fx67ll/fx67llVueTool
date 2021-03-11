@@ -1,14 +1,15 @@
 <template>
 	<div class="fx67ll-box">
-		<div class="fx67ll-title">
-			<span @click="linktoFx67ll">fx67ll</span>
-		</div>
+		<div class="fx67ll-title"><span @click="linktoFx67ll">fx67ll</span></div>
 		<div class="fx67ll-link">
 			<div class="fx67ll-link-item"><router-link tag="span" to="/mapcanvas">CanvasMap Tool Based on GaoDeMap</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/splitarea">SpliteArea Tool Based on GaoDeMap</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/hellothree">Threejs Hello World</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree">Threejs Test For The Miku</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree-FBX">Threejs Test For The FBX-Loader</router-link></div>
+			<div class="fx67ll-link-item">
+				<span><a target="_blank" href="http://211.149.128.130:82">Project Medical Model</a></span>
+			</div>
 			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/testnode">Nodejs Test Interface Based on Express & MongoDB</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/test">Code Test Tool</router-link></div>
 			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/devtest">Component Test Tool</router-link></div>
@@ -34,7 +35,7 @@ export default {
 	computed: {
 		// 判断是否是开发环境，组件测试页面仅在开发环境开放
 		isDev() {
-			return process.env.VUE_APP_ENV === 'development'
+			return process.env.VUE_APP_ENV === 'development';
 		}
 	},
 	methods: {
@@ -66,11 +67,11 @@ export default {
 		// }
 	}
 	.fx67ll-link {
-		max-height: calc(~"100% - 293px");
+		max-height: calc(~'100% - 293px');
 		overflow: auto;
 		padding: 0 100px;
 		margin: 50px 0;
-		.fx67ll-link-item{
+		.fx67ll-link-item {
 			width: 100%;
 			margin-bottom: 25px;
 			text-align: center;
@@ -80,6 +81,9 @@ export default {
 			}
 			span:hover {
 				color: @green;
+			}
+			a{
+				text-decoration: none;
 			}
 		}
 	}
