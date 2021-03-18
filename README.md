@@ -1,5 +1,5 @@
 # fx67llVueTool
-vue components
+Vue omponents
 
 欢迎参观[示例地址](http://ez13.top)
 
