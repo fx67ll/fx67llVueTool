@@ -10,6 +10,9 @@
 			<div class="fx67ll-link-item">
 				<span><a target="_blank" href="http://211.149.128.130:82">Project Medical Model</a></span>
 			</div>
+			<div class="fx67ll-link-item">
+				<span><a target="_blank" href="http://211.149.128.130:83">JDSMS Powered By Express & MongoDB</a></span>
+			</div>
 			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/testnode">Nodejs Test Interface Based on Express & MongoDB</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/test">Code Test Tool</router-link></div>
 			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/devtest">Component Test Tool</router-link></div>
