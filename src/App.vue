@@ -51,6 +51,7 @@ export default {
 				// console.log(`Waiting canvas-nest spread out......${time}s`);
 				// console.log(`canvas-nest is spread out!`);
 				console.log('code is magic!');
+				console.log('https://fx67ll.xyz');
 				if (!self.isLoadingCompleted) {
 					self.showSeconds(time + 1);
 				} else {
