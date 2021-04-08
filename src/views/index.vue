@@ -8,13 +8,13 @@
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree">Threejs Test For The Miku</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree-FBX">Threejs Test For The FBX-Loader</router-link></div>
 			<div class="fx67ll-link-item">
-				<span><a target="_blank" href="http://211.149.128.130:84">Project Medical Model</a></span>
+				<span><a target="_blank" href="http://three.fx67ll.com">Project Medical Model</a></span>
 			</div>
 			<div class="fx67ll-link-item">
-				<span><a target="_blank" href="http://211.149.128.130:83">Hello Express Powered By Express & MongoDB</a></span>
+				<span><a target="_blank" href="http://node.fx67ll.com">Hello Express Powered By Express & MongoDB</a></span>
 			</div>
 			<div class="fx67ll-link-item">
-				<span><a target="_blank" href="http://211.149.128.130:82">Good 404</a></span>
+				<span><a target="_blank" href="http://404.fx67ll.com">Good 404</a></span>
 			</div>
 			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/testnode">Nodejs Test Interface Based on Express & MongoDB</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/test">Code Test Tool</router-link></div>
