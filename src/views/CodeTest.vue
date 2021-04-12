@@ -20,7 +20,7 @@ export default {
 	data() {
 		return {
 			// curCode: MapCanvasCode,
-			curCode: '',
+			curCode: 'Powered By CodeMirror!\nhttps://codemirror.net\n\nThanks "Marijn Haverbeke" !!!\nhttps://github.com/marijnh',
 			cmOptions: {
 				value: '',
 				// mode: 'text/javascript',
