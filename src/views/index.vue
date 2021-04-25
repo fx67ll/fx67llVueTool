@@ -8,16 +8,26 @@
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree">Threejs Test For The Miku</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree-FBX">Threejs Test For The FBX-Loader</router-link></div>
 			<div class="fx67ll-link-item">
-				<span><a target="_blank" href="http://three.fx67ll.com">Project Medical Model</a></span>
+				<span><a target="_blank" href="http://three.fx67ll.com">Threejs Test For Medical Model Morph Animation</a></span>
 			</div>
 			<div class="fx67ll-link-item">
-				<span><a target="_blank" href="http://node.fx67ll.com">Hello Nodejs Powered By Express & MongoDB</a></span>
+				<span><a target="_blank" href="http://node.fx67ll.com">Nodejs Login/Register/CRUD Powered By Express & MongoDB</a></span>
 			</div>
-			<div class="fx67ll-link-item">
+			
+			<!-- 不需要Nodejs的内置测试页面了，原页面留着暂时不继续开发了 -->
+			<!-- <div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/testnode">Nodejs Test Interface Based on Express & MongoDB</router-link></div> -->
+
+			<!-- 404演示页面，感觉放出来没什么意义，就不放了 -->
+			<!-- <div class="fx67ll-link-item">
 				<span><a target="_blank" href="http://404.fx67ll.com">Good 404</a></span>
+			</div> -->
+			
+			<div class="fx67ll-link-item">
+				<span><a target="_blank" href="https://www.yuque.com/docs/share/50146b98-8656-40b5-bbf9-c008bb31530f?# 《fx67llVueUI》">fx67llVueUI</a></span>
+				<span>&nbsp; | | &nbsp;</span>
+				<span><a target="_blank" href="https://www.yuque.com/docs/share/66ee9f75-5135-445f-a997-b476a5f342bf?# 《fx67llQuickEcharts》">fx67llQuickEcharts</a></span>
 			</div>
-			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/testnode">Nodejs Test Interface Based on Express & MongoDB</router-link></div>
-			<div class="fx67ll-link-item"><router-link tag="span" to="/test">Code Test Tool</router-link></div>
+			<div class="fx67ll-link-item"><router-link tag="span" to="/test">Code Mirror</router-link></div>
 			<div class="fx67ll-link-item" v-show="isDev"><router-link tag="span" to="/devtest">Component Test Tool</router-link></div>
 		</div>
 		<div class="fx67ll-footer">
