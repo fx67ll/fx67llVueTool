@@ -8,7 +8,8 @@
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree">Threejs Test For The Miku</router-link></div>
 			<div class="fx67ll-link-item"><router-link tag="span" to="/testthree-FBX">Threejs Test For The FBX-Loader</router-link></div>
 			<div class="fx67ll-link-item">
-				<span><a target="_blank" href="http://three.fx67ll.com">Threejs Test For Medical Model Morph Animation</a></span>
+				<!-- <span><a target="_blank" href="http://three.fx67ll.com">Threejs Test For Medical Model Morph Animation</a></span> -->
+				<span><a target="_blank" href="http://three.fx67ll.com">All My Threejs Projects Collection</a></span>
 			</div>
 			<div class="fx67ll-link-item">
 				<span><a target="_blank" href="http://node.fx67ll.com">Nodejs Login/Register/CRUD Powered By Express & MongoDB</a></span>
