@@ -1,6 +1,6 @@
 {
-  "name": "default",
-  "version": "0.1.0",
+  "name": "fx67llVueTool",
+  "version": "0.4.4",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
